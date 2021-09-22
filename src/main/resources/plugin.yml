@@ -11,7 +11,13 @@ commands:
     description: GoodLuck
     usage: /prefix
     permission: AspenPrefix.command.prefix
+
   prefix list:
     description: GoodLuck
     usage: /prefix list
     permission: AspenPrefix.command.prefix.list
+
+  prefix set:
+    description: GoodLuck
+    usage: /prefix list
+    permission: AspenPrefix.command.prefix.set

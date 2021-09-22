@@ -17,7 +17,6 @@ public final class AspenPrefix extends JavaPlugin {
     public static Logger logger;
     public static org.bukkit.plugin.Plugin plugin = null;
 
-
     @Override
     public void onEnable() {
         plugin=this;

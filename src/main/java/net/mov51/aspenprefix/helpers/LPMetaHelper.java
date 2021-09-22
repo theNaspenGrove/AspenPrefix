@@ -11,7 +11,17 @@ import static net.mov51.aspenprefix.AspenPrefix.LPapi;
 public class LPMetaHelper {
     enum MetaKey {
         topLevelMetaKey("aspen-prefix-"),
+
+        //list of prefixes the user has access to
+        //-updated on join and prefix-list
+        prefixList(topLevelMetaKey.key + "prefix-list"),
+
+        //the current prefix the user has selected
+        //-defaults to the highest weight when user hasn't selected any
+        //-value is "custom" when the custom prefix should be used
         currentPrefix(topLevelMetaKey.key + "current-prefix"),
+
+        //the custom prefix that the use has defined
         customPrefix(topLevelMetaKey.key + "custom-prefix");
 
         String key;
