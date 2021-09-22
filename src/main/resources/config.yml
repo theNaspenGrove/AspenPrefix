@@ -1,0 +1,7 @@
+chat-prefix: "&6&l[&2Aspen-Prefix&6&l]&r"
+
+Prefixes:
+  Staff: "&6[&r{#FF8317}Staff&6]&r"
+  Moderator: "&6[&r{#00c2ff}Mod&6]&r"
+  VIP: "&6[&r{#9f29ff}VIP&6]&r"
+  Guest: "&6[&r{#11806a}Spectator&6]&r"

@@ -1,0 +1,17 @@
+name: AspenPrefix
+version: ${project.version}
+main: net.mov51.aspenprefix.AspenPrefix
+api-version: 1.17
+prefix: ApenPrefix
+depend: [LuckPerms]
+authors: [mov51]
+website: mov51.net
+commands:
+  prefix:
+    description: GoodLuck
+    usage: /prefix
+    permission: AspenPrefix.command.prefix
+  prefix list:
+    description: GoodLuck
+    usage: /prefix list
+    permission: AspenPrefix.command.prefix.list
