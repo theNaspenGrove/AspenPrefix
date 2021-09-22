@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public final class AspenPrefix extends JavaPlugin {
 
     //Register the LuckPerms API variable
-    public LuckPerms LPapi;
+    public static LuckPerms LPapi;
     //register plugin
     public static Logger logger;
     public static org.bukkit.plugin.Plugin plugin = null;
