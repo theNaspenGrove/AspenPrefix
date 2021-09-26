@@ -34,6 +34,7 @@ public class PrefixCommand implements CommandExecutor {
             }else if(args.length == 1){
                 switch (args[0]){
                     case "list":
+                        //todo accept another player as an arg
                         if(hasPermission(p,prefixListCommand)){
                             for (String key :  Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false)) {
                                 sendChatMessage(p,"These are the prefixes you have!");
@@ -43,10 +44,11 @@ public class PrefixCommand implements CommandExecutor {
                         }
                         break;
                     case "set":
+                        //todo accept another player as an arg
                         if(hasPermission(p,prefixSetCommand)){
                             //todo ask user which prefix they'd like out of the ones they have permission to use
                             sendChatMessage(p,"You have permission to set your prefix!");
-                            sendChatMessage(p,getAllPrefixes(p));
+                            sendColoredChatMessage(p,getAllPrefixes(p));
                         }
                         break;
                 }

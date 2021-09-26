@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 
 public class messageHelper {
-    static String prefix = AspenPrefix.plugin.getConfig().getString("chat-prefix");
-    static String colorPrefix = ChatColor.translateAlternateColorCodes('&', prefix != null ? prefix : "&6&l[&2Aspen-Prefix&6&l]&r");
+    static final String prefix = AspenPrefix.plugin.getConfig().getString("chat-prefix");
+    static final String colorPrefix = ChatColor.translateAlternateColorCodes('&', prefix != null ? prefix : "&6&l[&2Aspen-Prefix&6&l]&r");
 
     public static void sendChatMessage(Player p, String message){
         p.sendMessage(colorPrefix + " " + message);
@@ -22,5 +22,11 @@ public class messageHelper {
 
     public static void sendColoredChatMessage(Player p, String message){
         p.sendMessage(colorPrefix + " " + ChatColor.translateAlternateColorCodes('&',message));
+    }
+
+    public static void sendColoredChatMessage(Player p, ArrayList<String> messages){
+        for(String message : messages) {
+            p.sendMessage(colorPrefix + " " + ChatColor.translateAlternateColorCodes('&', message));
+        }
     }
 }

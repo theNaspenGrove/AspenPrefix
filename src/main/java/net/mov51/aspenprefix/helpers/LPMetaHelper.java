@@ -24,7 +24,7 @@ public class LPMetaHelper {
         //the custom prefix that the use has defined
         customPrefix(topLevelMetaKey.key + "custom-prefix");
 
-        String key;
+        final String key;
 
         MetaKey(String key){
             this.key = key;
@@ -45,7 +45,7 @@ public class LPMetaHelper {
         User user = LPapi.getPlayerAdapter(Player.class).getUser(p);
 
         // create a new MetaNode holding the level value
-        // of course, this can have context/expiry/etc too!
+        // of course, this can have context/expiry/etc. too!
         MetaNode node = MetaNode.builder(metaKey.key, value).build();
 
         // clear any existing meta nodes with the same key - we want to override

@@ -16,6 +16,8 @@ public class PrefixHelper {
         return "";
     }
 
+
+
     public String getCurrentPrefix(Player p){
         //TODO the current prefix for the player
         // return selected prefix if one exists

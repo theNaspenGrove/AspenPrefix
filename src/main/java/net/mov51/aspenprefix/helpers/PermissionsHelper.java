@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import static net.mov51.aspenprefix.AspenPrefix.LPapi;
 import static net.mov51.aspenprefix.AspenPrefix.logger;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.prefixAddition;
+import static net.mov51.aspenprefix.helpers.configHelper.getPrefix;
+import static net.mov51.aspenprefix.helpers.configHelper.isDefined;
 import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
 
 public class PermissionsHelper {
 
-    public static String permissionPrefix = "AspenPrefix";
-    public static String defaultDeny = "You don't have permission to run that command!";
+    public static final String permissionPrefix = "AspenPrefix";
+    public static final String defaultDeny = "You don't have permission to run that command!";
 
     public enum Permission{
         prefixCommand(permissionPrefix + ".command.prefix", "You aren't allowed to run the prefix command!" ,"/prefix"),
@@ -25,7 +27,7 @@ public class PermissionsHelper {
         customPrefixOwn(permissionPrefix + ".setOwnCustom"),
         customPrefixOther(permissionPrefix + ".setOtherCustom");
 
-        public String key;
+        public final String key;
         public String denyMessage;
         public String command;
 
@@ -64,7 +66,10 @@ public class PermissionsHelper {
                 //todo check for prefix in config and verify it's existence
                 // - if it doesn't exist, send the permission in red and send a console error
                 // - if it does exist, show the prefix value
-                prefixes.add(n.getKey());
+                String prefix = n.getKey().split("\\.")[2];
+                if(isDefined(prefix)){
+                    prefixes.add(getPrefix(prefix));
+                }
             }
         }
         return prefixes;
