@@ -27,6 +27,7 @@ public class PermissionsHelper {
         customPrefixOwn(permissionPrefix + ".setOwnCustom"),
         customPrefixOther(permissionPrefix + ".setOtherCustom");
 
+
         public final String key;
         public String denyMessage;
         public String command;

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import static net.mov51.aspenprefix.AspenPrefix.LPapi;
 
 public class LPMetaHelper {
-    enum MetaKey {
+    public enum MetaKey {
         topLevelMetaKey("aspen-prefix-"),
 
         //list of prefixes the user has access to

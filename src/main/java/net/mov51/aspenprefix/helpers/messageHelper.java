@@ -1,5 +1,8 @@
 package net.mov51.aspenprefix.helpers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.mov51.aspenprefix.AspenPrefix;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -24,9 +27,16 @@ public class messageHelper {
         p.sendMessage(colorPrefix + " " + ChatColor.translateAlternateColorCodes('&',message));
     }
 
-    public static void sendColoredChatMessage(Player p, ArrayList<String> messages){
-        for(String message : messages) {
+    public static void sendColoredChatMessage(Player p, ArrayList<String> messages) {
+        for (String message : messages) {
             p.sendMessage(colorPrefix + " " + ChatColor.translateAlternateColorCodes('&', message));
         }
+    }
+
+    public static TextComponent buildCommandComponent(String message, String command){
+        return Component.text()
+                .content(message)
+                .clickEvent(ClickEvent.runCommand(command))
+                .build();
     }
 }
