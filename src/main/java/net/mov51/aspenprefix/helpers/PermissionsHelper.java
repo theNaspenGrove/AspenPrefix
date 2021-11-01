@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import static net.mov51.aspenprefix.AspenPrefix.LPapi;
 import static net.mov51.aspenprefix.AspenPrefix.logger;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.prefixAddition;
-import static net.mov51.aspenprefix.helpers.configHelper.getPrefix;
-import static net.mov51.aspenprefix.helpers.configHelper.isPrefixDefined;
+import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
 import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
 
 public class PermissionsHelper {

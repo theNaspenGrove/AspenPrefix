@@ -1,8 +1,6 @@
 package net.mov51.aspenprefix.commands;
 
 import net.mov51.aspenprefix.AspenPrefix;
-import net.mov51.aspenprefix.helpers.PrefixHelper;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,14 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 import static net.mov51.aspenprefix.AspenPrefix.logger;
-import static net.mov51.aspenprefix.helpers.LPMetaHelper.MetaKey.currentPrefix;
-import static net.mov51.aspenprefix.helpers.LPMetaHelper.setMetaValue;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.*;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.getAllPrefixes;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.hasPermission;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.getSelected;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.setSelected;
-import static net.mov51.aspenprefix.helpers.configHelper.isPrefixDefined;
+import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
 import static net.mov51.aspenprefix.helpers.messageHelper.*;
 
 public class PrefixCommand implements CommandExecutor {
@@ -68,7 +64,6 @@ public class PrefixCommand implements CommandExecutor {
 
                                     break;
                                 case"1":
-                                    //we have full args!
                                     //todo check if that prefix is defined in the config!
                                     //todo Get prefix value from config
                                     if(isPrefixDefined(args[1])){
@@ -80,6 +75,7 @@ public class PrefixCommand implements CommandExecutor {
                                     logger.info("Player " + args[2] + "selected!");
                                     break;
                                 default:
+                                    //todo fix error message
                                     sendChatMessage(p,"Too many arguments! Please only provide a player, and the prefix you'd like to switch to!");
                             }
                         }

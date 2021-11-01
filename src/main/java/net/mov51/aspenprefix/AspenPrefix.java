@@ -30,6 +30,11 @@ public final class AspenPrefix extends JavaPlugin {
             LPapi = provider.getProvider();
             logger.info("LuckPerms dependency loaded!");
         }
+
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new AspenPrefixPlaceholders(this).register();
+        }
+
         Objects.requireNonNull(this.getCommand("prefix")).setExecutor(new PrefixCommand());
         logger.info("You've been PREFIXED!");
     }

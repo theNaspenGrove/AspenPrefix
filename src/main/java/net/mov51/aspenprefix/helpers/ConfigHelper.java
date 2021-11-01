@@ -1,7 +1,6 @@
 package net.mov51.aspenprefix.helpers;
 
 import net.mov51.aspenprefix.AspenPrefix;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Objects;
@@ -9,7 +8,7 @@ import java.util.Set;
 
 import static net.mov51.aspenprefix.AspenPrefix.logger;
 
-public class configHelper {
+public class ConfigHelper {
 
     public static final FileConfiguration c = AspenPrefix.plugin.getConfig();
     public static final Set<String> prefixes = Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false);
