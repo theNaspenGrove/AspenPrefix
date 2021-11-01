@@ -14,16 +14,12 @@ public class configHelper {
     public static final FileConfiguration c = AspenPrefix.plugin.getConfig();
     public static final Set<String> prefixes = Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false);
 
-    public static boolean isDefined(String prefix){
-        if(prefixes.contains(prefix)){
-            return true;
-        }
-        logger.warning(ChatColor.RED + "Prefix " + prefix + " is not defined in the config but you have a permission node for it!");
-        return false;
+    public static boolean isPrefixDefined(String prefix){
+        return prefixes.contains(prefix);
     }
 
     public static String getPrefix(String requestedPrefix){
-        if(isDefined(requestedPrefix)){
+        if(isPrefixDefined(requestedPrefix)){
             return c.getString("Prefixes." + requestedPrefix);
         }
         logger.warning("Requested prefix " + requestedPrefix + " didn't exist!");

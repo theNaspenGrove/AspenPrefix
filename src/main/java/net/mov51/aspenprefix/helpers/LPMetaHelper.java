@@ -22,7 +22,10 @@ public class LPMetaHelper {
         currentPrefix(topLevelMetaKey.key + "current-prefix"),
 
         //the custom prefix that the use has defined
-        customPrefix(topLevelMetaKey.key + "custom-prefix");
+        customPrefix(topLevelMetaKey.key + "custom-prefix"),
+
+        //the custom prefix that the use has defined
+        prefixValue(topLevelMetaKey.key + "prefix-value");
 
         final String key;
 

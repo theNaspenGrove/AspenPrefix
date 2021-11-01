@@ -3,6 +3,7 @@ package net.mov51.aspenprefix.helpers;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import net.luckperms.api.query.QueryOptions;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import static net.mov51.aspenprefix.AspenPrefix.LPapi;
 import static net.mov51.aspenprefix.AspenPrefix.logger;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.prefixAddition;
 import static net.mov51.aspenprefix.helpers.configHelper.getPrefix;
-import static net.mov51.aspenprefix.helpers.configHelper.isDefined;
+import static net.mov51.aspenprefix.helpers.configHelper.isPrefixDefined;
 import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
 
 public class PermissionsHelper {
@@ -64,12 +65,11 @@ public class PermissionsHelper {
 
         for(Node n : user.resolveInheritedNodes(QueryOptions.nonContextual())){
             if (n.getKey().matches(prefixAddition.key)){
-                //todo check for prefix in config and verify it's existence
-                // - if it doesn't exist, send the permission in red and send a console error
-                // - if it does exist, show the prefix value
                 String prefix = n.getKey().split("\\.")[2];
-                if(isDefined(prefix)){
-                    prefixes.add(getPrefix(prefix));
+                if(isPrefixDefined(prefix)){
+                    prefixes.add(prefix);
+                }else{
+                    logger.warning(ChatColor.RED + "Prefix " + prefix + " is not defined in the config but you have a permission node for it!");
                 }
             }
         }

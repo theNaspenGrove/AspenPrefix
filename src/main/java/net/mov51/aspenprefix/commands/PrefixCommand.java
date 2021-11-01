@@ -19,8 +19,9 @@ import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.*;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.getAllPrefixes;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.hasPermission;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.getSelected;
-import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
-import static net.mov51.aspenprefix.helpers.messageHelper.sendColoredChatMessage;
+import static net.mov51.aspenprefix.helpers.PrefixHelper.setSelected;
+import static net.mov51.aspenprefix.helpers.configHelper.isPrefixDefined;
+import static net.mov51.aspenprefix.helpers.messageHelper.*;
 
 public class PrefixCommand implements CommandExecutor {
     @Override
@@ -45,7 +46,6 @@ public class PrefixCommand implements CommandExecutor {
                             sendChatMessage(p,"These are the prefixes you have!");
                             for (String key :  Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false)) {
                                 sendColoredChatMessage(p,key);
-                                sendColoredChatMessage(p,c.getString("Prefixes." + key));
                             }
                         }
                         break;
@@ -62,13 +62,19 @@ public class PrefixCommand implements CommandExecutor {
                                     //todo ask user which prefix they'd like out of the ones they have permission to use
                                     sendChatMessage(p,"You have permission to set your prefix!");
                                     sendChatMessage(p,"Which one would you like to use?");
-                                    sendColoredChatMessage(p,getAllPrefixes(p));
+                                    for (String prefix :  getAllPrefixes(p)) {
+                                        sendChatMessage(p,buildCommandComponent(prefix,"/prefix set " + prefix));
+                                    }
+
                                     break;
                                 case"1":
                                     //we have full args!
                                     //todo check if that prefix is defined in the config!
                                     //todo Get prefix value from config
-                                    setMetaValue(p,currentPrefix,args[1]);
+                                    if(isPrefixDefined(args[1])){
+                                        sendChatMessage(p,"You selected your " + args[1] + " prefix!");
+                                        setSelected(p,args[1]);
+                                    }
                                     break;
                                 case"2":
                                     logger.info("Player " + args[2] + "selected!");
