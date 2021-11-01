@@ -12,10 +12,6 @@ public class LPMetaHelper {
     public enum MetaKey {
         topLevelMetaKey("Aspen-Prefix_"),
 
-        //list of prefixes the user has access to
-        //-updated on join and prefix-list
-        prefixList(topLevelMetaKey.key + "Prefix-List"),
-
         //the current prefix the user has selected
         //-defaults to the highest weight when user hasn't selected any
         //-value is "custom" when the custom prefix should be used

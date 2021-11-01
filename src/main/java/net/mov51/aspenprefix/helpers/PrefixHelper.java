@@ -9,12 +9,6 @@ import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefix;
 
 public class PrefixHelper {
 
-    public static String[] getPrefixList(Player p){
-        //TODO Get the stored list of available prefixes for the player
-        return null;
-    }
-
-
     public static String getSelected(Player p){
         //TODO Get selected prefix for player if one exists
         // return empty string if one doesn't
@@ -32,8 +26,6 @@ public class PrefixHelper {
         // return empty string if one doesn't
         setMetaValue(p,currentPrefix,key);
     }
-
-
 
     public static String getCurrentPrefix(Player p){
         //TODO the current prefix for the player
