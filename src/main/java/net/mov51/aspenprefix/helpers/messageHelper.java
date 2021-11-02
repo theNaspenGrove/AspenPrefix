@@ -6,6 +6,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.mov51.aspenprefix.AspenPrefix;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -36,6 +37,10 @@ public class messageHelper {
         for(String message : messages){
             p.sendMessage(colorPrefix + " " + message);
         }
+    }
+
+    public static void sendChatBar(Player p){
+        p.sendMessage(colorPrefix + " " + StringUtils.center("----",53));
     }
 
     public static void sendColoredChatMessage(Player p, String message){

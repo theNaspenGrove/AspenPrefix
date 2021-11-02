@@ -6,13 +6,12 @@ import static net.mov51.aspenprefix.helpers.LPMetaHelper.MetaKey.currentPrefix;
 import static net.mov51.aspenprefix.helpers.LPMetaHelper.getMetaValue;
 import static net.mov51.aspenprefix.helpers.LPMetaHelper.setMetaValue;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefix;
+import static net.mov51.aspenprefix.helpers.PermissionsHelper.getAllPrefixes;
 
 public class PrefixHelper {
 
     public static String getSelected(Player p){
-        //TODO Get selected prefix for player if one exists
-        // return empty string if one doesn't
-        return (getMetaValue(p,currentPrefix).isEmpty()) ? "None" : getMetaValue(p,currentPrefix);
+        return (getMetaValue(p,currentPrefix) == null) ? "" : getMetaValue(p,currentPrefix);
     }
 
     public static String getSelectedValue(Player p){
@@ -31,7 +30,10 @@ public class PrefixHelper {
         //TODO the current prefix for the player
         // return selected prefix if one exists
         // return highest weight prefix if none exists
-        return null;
+        if(getSelected(p).isEmpty()){
+            return getPrefix(getAllPrefixes(p).get(0));
+        }else
+        return getPrefix(getSelected(p));
     }
 
 }

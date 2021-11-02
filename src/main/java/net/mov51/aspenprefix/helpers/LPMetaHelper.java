@@ -3,6 +3,7 @@ package net.mov51.aspenprefix.helpers;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.NodeType;
+import net.luckperms.api.node.matcher.NodeMatcher;
 import net.luckperms.api.node.types.MetaNode;
 import org.bukkit.entity.Player;
 
@@ -45,7 +46,7 @@ public class LPMetaHelper {
         MetaNode node = MetaNode.builder(metaKey.key, value).build();
 
         // clear any existing meta nodes with the same key - we want to override
-        user.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equals(metaKey.key)));
+        user.data().clear(NodeMatcher.metaKey(metaKey.key));
         // add the new node
         user.data().add(node);
 

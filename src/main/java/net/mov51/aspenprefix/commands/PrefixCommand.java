@@ -1,14 +1,12 @@
 package net.mov51.aspenprefix.commands;
 
-import net.mov51.aspenprefix.AspenPrefix;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 
 import static net.mov51.aspenprefix.AspenPrefix.logger;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.*;
@@ -29,10 +27,21 @@ public class PrefixCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            FileConfiguration c = AspenPrefix.plugin.getConfig();
             if(args.length == 0){
                 if(hasPermission(p,prefixCommand)){
-                    sendChatMessage(p,"your prefix is " + getSelected(p) + "!");
+                    if(getSelected(p).isEmpty()){
+                        sendChatMessage(p,"You don't have a selected prefix!");
+                        sendChatMessage(p,
+                                Component.text("If you'd like to select one, ")
+                                .append(buildCommandComponent("Click Here!","/prefix list"
+                                )));
+                    }else{
+                        sendChatMessage(p,"your prefix is " + getSelected(p) + "!");
+                        sendChatMessage(p,
+                                Component.text("If you'd like to select another one, ")
+                                .append(buildCommandComponent("Click Here!","/prefix list"
+                                )));
+                    }
                 }
             }else {
                 switch (args[0]){
@@ -40,9 +49,12 @@ public class PrefixCommand implements CommandExecutor {
                         //todo accept another player as an arg
                         if(hasPermission(p,prefixListCommand)){
                             sendChatMessage(p,"These are the prefixes you have!");
-                            for (String key :  Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false)) {
-                                sendColoredChatMessage(p,key);
+                            sendChatMessage(p,"Which one would you like to use?");
+                            sendChatBar(p);
+                            for (String prefix :  getAllPrefixes(p)) {
+                                sendChatMessage(p,buildCommandComponent(prefix,"/prefix set " + prefix));
                             }
+                            sendChatBar(p);
                         }
                         break;
                     case "set":
@@ -55,23 +67,17 @@ public class PrefixCommand implements CommandExecutor {
                             switch (String.valueOf(args.length - 1)){
                                 case"0":
                                     //no args, show command help!
-                                    //todo ask user which prefix they'd like out of the ones they have permission to use
-                                    sendChatMessage(p,"You have permission to set your prefix!");
-                                    sendChatMessage(p,"Which one would you like to use?");
-                                    for (String prefix :  getAllPrefixes(p)) {
-                                        sendChatMessage(p,buildCommandComponent(prefix,"/prefix set " + prefix));
-                                    }
-
+                                    sendChatMessage(p,"Please use the 'prefix list' command to set select the prefix you want!");
                                     break;
                                 case"1":
-                                    //todo check if that prefix is defined in the config!
-                                    //todo Get prefix value from config
                                     if(isPrefixDefined(args[1])){
                                         sendChatMessage(p,"You selected your " + args[1] + " prefix!");
                                         setSelected(p,args[1]);
                                     }
                                     break;
                                 case"2":
+                                    //todo check for set others perm
+                                    // set other player
                                     logger.info("Player " + args[2] + "selected!");
                                     break;
                                 default:
