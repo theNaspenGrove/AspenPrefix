@@ -1,5 +1,7 @@
 package net.mov51.aspenprefix.helpers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import net.luckperms.api.query.QueryOptions;
@@ -17,7 +19,7 @@ import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
 public class PermissionsHelper {
 
     public static final String permissionPrefix = "AspenPrefix";
-    public static final String defaultDeny = "You don't have permission to run that command!";
+    public static final TextComponent defaultDeny = Component.text().content("You don't have permission to run that command!").build();
 
     public enum Permission{
         prefixCommand(permissionPrefix + ".command.prefix", "You aren't allowed to run the prefix command!" ,"/prefix"),
@@ -29,7 +31,7 @@ public class PermissionsHelper {
 
 
         public final String key;
-        public String denyMessage;
+        public TextComponent denyMessage;
         public String command;
 
         Permission(String permission){
@@ -44,7 +46,7 @@ public class PermissionsHelper {
 
         Permission(String permission, String denyMessage, String command){
             this.key = permission;
-            this.denyMessage = denyMessage;
+            this.denyMessage = Component.text().content(denyMessage).build();
             this.command = command;
         }
     }

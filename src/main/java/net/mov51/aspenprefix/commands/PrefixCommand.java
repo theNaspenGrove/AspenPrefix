@@ -1,6 +1,7 @@
 package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,17 +31,19 @@ public class PrefixCommand implements CommandExecutor {
             if(args.length == 0){
                 if(hasPermission(p,prefixCommand)){
                     if(getSelected(p).isEmpty()){
-                        sendChatMessage(p,"You don't have a selected prefix!");
-                        sendChatMessage(p,
-                                Component.text("If you'd like to select one, ")
-                                .append(buildCommandComponent("Click Here!","/prefix list"
-                                )));
+                        sendChatMessage(p,Component.text().content("You don't have a selected prefix!").build());
+                        sendChatMessage(p, Component.text()
+                                .content("If you'd like to select one, ")
+                                .append(buildCommandComponent("Click Here!","/prefix list"))
+                                .build());
                     }else{
-                        sendChatMessage(p,"your prefix is " + getSelected(p) + "!");
-                        sendChatMessage(p,
-                                Component.text("If you'd like to select another one, ")
-                                .append(buildCommandComponent("Click Here!","/prefix list"
-                                )));
+                        sendChatMessage(p,Component.text()
+                                .content("your prefix is " + getSelected(p) + "!")
+                                .build());
+                        sendChatMessage(p, Component.text()
+                                .content("If you'd like to select another one, ")
+                                .append(buildCommandComponent("Click Here!","/prefix list"))
+                                .build());
                     }
                 }
             }else {
@@ -48,13 +51,17 @@ public class PrefixCommand implements CommandExecutor {
                     case "list":
                         //todo accept another player as an arg
                         if(hasPermission(p,prefixListCommand)){
-                            sendChatMessage(p,"These are the prefixes you have!");
-                            sendChatMessage(p,"Which one would you like to use?");
-                            sendChatBar(p);
+                            sendChatMessage(p,Component.text()
+                                    .content("These are the prefixes you have!")
+                                    .build());
+                            sendChatMessage(p,Component.text()
+                                    .content("Which one would you like to use?")
+                                    .build());
+                            sendBarMessage(p);
                             for (String prefix :  getAllPrefixes(p)) {
-                                sendChatMessage(p,buildCommandComponent(prefix,"/prefix set " + prefix));
+                                sendChatMessage(p,(buildCommandComponent(prefix, StringUtils.center("/prefix set " + prefix,53))));
                             }
-                            sendChatBar(p);
+                            sendBarMessage(p);
                         }
                         break;
                     case "set":
@@ -67,11 +74,15 @@ public class PrefixCommand implements CommandExecutor {
                             switch (String.valueOf(args.length - 1)){
                                 case"0":
                                     //no args, show command help!
-                                    sendChatMessage(p,"Please use the 'prefix list' command to set select the prefix you want!");
+                                    sendChatMessage(p,Component.text()
+                                            .content("Please use the 'prefix list' command to set select the prefix you want!")
+                                            .build());
                                     break;
                                 case"1":
                                     if(isPrefixDefined(args[1])){
-                                        sendChatMessage(p,"You selected your " + args[1] + " prefix!");
+                                        sendChatMessage(p,Component.text()
+                                                .content("You selected your " + args[1] + " prefix!")
+                                                .build());
                                         setSelected(p,args[1]);
                                     }
                                     break;
@@ -82,7 +93,9 @@ public class PrefixCommand implements CommandExecutor {
                                     break;
                                 default:
                                     //todo fix error message
-                                    sendChatMessage(p,"Too many arguments! Please only provide a player, and the prefix you'd like to switch to!");
+                                    sendChatMessage(p,Component.text()
+                                            .content("Too many arguments! Please only provide a player, and the prefix you'd like to switch to!")
+                                            .build());
                             }
                         }
                         break;

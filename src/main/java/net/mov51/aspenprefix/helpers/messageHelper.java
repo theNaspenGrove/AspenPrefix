@@ -7,56 +7,34 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.mov51.aspenprefix.AspenPrefix;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-
 public class messageHelper {
-    static final String prefix = AspenPrefix.plugin.getConfig().getString("chat-prefix");
-    static final String colorPrefix = ChatColor.translateAlternateColorCodes('&', prefix != null ? prefix : "&6&l[&2Aspen-Prefix&6&l]&r");
-    static final TextComponent componentPrefix = Component.text("")
-            .append(Component.text("[")
+    static String prefix = AspenPrefix.plugin.getConfig().getString("chat-prefix");
+    static TextComponent componentPrefix =
+            Component.text("[")
                     .color(NamedTextColor.GOLD)
                     .decoration(TextDecoration.BOLD, true)
-            ).append(Component.text("Aspen-Prefix")
-                    .color(NamedTextColor.DARK_GREEN))
+            .append(Component.text(prefix != null ? prefix : "Aspen-Prefix")
+                    .color(NamedTextColor.DARK_GREEN)
+                    .decoration(TextDecoration.BOLD, false))
             .append(Component.text("] ")
                     .color(NamedTextColor.GOLD)
                     .decoration(TextDecoration.BOLD, true));
 
-    public static void sendChatMessage(Player p, String message){
-        p.sendMessage(colorPrefix + " " + message);
-    }
-
     public static void sendChatMessage(Player p, TextComponent message){
-        p.sendMessage(componentPrefix.append(message));
+        p.sendMessage(Component.text().append(componentPrefix).append(message).build());
     }
 
-    public static void sendChatMessage(Player p, ArrayList<String> messages){
-        for(String message : messages){
-            p.sendMessage(colorPrefix + " " + message);
-        }
-    }
-
-    public static void sendChatBar(Player p){
-        p.sendMessage(colorPrefix + " " + StringUtils.center("----",53));
-    }
-
-    public static void sendColoredChatMessage(Player p, String message){
-        p.sendMessage(colorPrefix + " " + ChatColor.translateAlternateColorCodes('&',message));
-    }
-
-    public static void sendColoredChatMessage(Player p, ArrayList<String> messages) {
-        for (String message : messages) {
-            p.sendMessage(colorPrefix + " " + ChatColor.translateAlternateColorCodes('&', message));
-        }
+    public static void sendBarMessage(Player p){
+        sendChatMessage(p,Component.text()
+                .content(StringUtils.center("-----",53))
+                .build());
     }
 
     public static TextComponent buildCommandComponent(String message, String command){
-        return Component.text()
-                .content(message)
-                .clickEvent(ClickEvent.runCommand(command))
-                .build();
+        return Component.text(message)
+                .clickEvent(ClickEvent.runCommand(command));
     }
+
 }
