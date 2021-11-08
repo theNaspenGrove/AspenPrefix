@@ -49,55 +49,110 @@ public class PrefixCommand implements CommandExecutor {
             }else {
                 switch (args[0]){
                     case "list":
-                        //todo accept another player as an arg
+                        //prefix list[0] <player>[1]
+
                         if(hasPermission(p,prefixListCommand)){
-                            sendChatMessage(p,Component.text()
-                                    .content("These are the prefixes you have!")
-                                    .build());
-                            sendChatMessage(p,Component.text()
-                                    .content("Which one would you like to use?")
-                                    .build());
-                            sendBarMessage(p);
-                            for (String prefix :  getAllPrefixes(p)) {
-                                sendChatMessage(p,(buildCommandComponent(prefix, StringUtils.center("/prefix set " + prefix,53))));
+                            if(args.length <= 2){
+                                //args should be a maximum of 2
+                                // list[1] <player>[2]
+                                if(args.length == 1){
+                                    //only the list subcommand was passed
+                                    // list the prefixes for the current sender
+                                    sendChatMessage(p,Component.text()
+                                            .content("These are the prefixes you have!")
+                                            .build());
+                                    sendChatMessage(p,Component.text()
+                                            .content("Which one would you like to use?")
+                                            .build());
+                                    sendBarMessage(p);
+                                    if(hasPermission(p,customPrefixOwn)){
+                                        sendChatMessage(p,(buildCommandComponent("Custom", StringUtils.center("/prefix setCustom",53))));
+                                    }
+                                    for (String prefix :  getAllPrefixes(p)) {
+                                        sendChatMessage(p,(buildCommandComponent(prefix, StringUtils.center("/prefix set " + prefix,53))));
+                                    }
+                                    sendBarMessage(p);
+                                }else{
+                                    //the list subcommand and a target were passed
+                                    // test for a valid target and list their prefixes
+                                    //todo list the prefixes for the target
+                                    logger.info("Target " + args[1] + "selected for prefix list!");
+                                }
+
                             }
-                            sendBarMessage(p);
                         }
                         break;
                     case "set":
-                        //todo accept another player as an arg
-                        //prefix [0]set [1]Staff [2]mov51
-                        //prefix #1 set #2 Staff # 3 mov51
+                        //prefix set[0] <prefix>[1] <player>[2]
 
                         if(hasPermission(p,prefixSetCommand)){
-                            logger.info("Prefix args.length is " + args.length);
-                            switch (String.valueOf(args.length - 1)){
-                                case"0":
-                                    //no args, show command help!
+                            //args should be a maximum of 3
+                            // set[1] <prefix>[2] <player>[3]
+                            if(args.length <= 3){
+                                if(args.length == 1){
+                                    //only the set subcommand was passed
+                                    // check for permission and send help message
                                     sendChatMessage(p,Component.text()
                                             .content("Please use the 'prefix list' command to set select the prefix you want!")
                                             .build());
-                                    break;
-                                case"1":
+
+                                } else if(args.length == 2){
+                                    //the set subcommand and the desired prefix were passed
+                                    // check for permission and set the current senders prefix
                                     if(isPrefixDefined(args[1])){
+                                        setSelected(p,args[1]);
                                         sendChatMessage(p,Component.text()
                                                 .content("You selected your " + args[1] + " prefix!")
                                                 .build());
-                                        setSelected(p,args[1]);
                                     }
-                                    break;
-                                case"2":
+
+                                } else{
+                                    //the set command, the desired prefix, and a target were passed
+                                    // check for permission, a valid target, and set the targets prefix
                                     //todo check for set others perm
                                     // set other player
-                                    logger.info("Player " + args[2] + "selected!");
-                                    break;
-                                default:
-                                    //todo fix error message
-                                    sendChatMessage(p,Component.text()
-                                            .content("Too many arguments! Please only provide a player, and the prefix you'd like to switch to!")
-                                            .build());
+                                    logger.info("Target " + args[2] + "selected for prefix set!");
+
+                                }
+                            } else{
+                                //too many arguments were passed
+                                // provide a help message
+                                //todo fix error message
+                                sendChatMessage(p,Component.text()
+                                        .content("Too many arguments! Please only provide a player, and the prefix you'd like to switch to!")
+                                        .build());
                             }
+
                         }
+                        break;
+                    case"setCustom":
+                        //prefix setCustom[0] <player>[1]
+
+                        if(args.length <= 2){
+                            //args should be a maximum of 2
+                            // setCustom[1] <player>[2]
+
+                            if(args.length == 1){
+                                //the setCustom subcommand was passed
+                                // check for permission and send setCustom message
+
+                                if(hasPermission(p,prefixSetCustomCommand)){
+                                    //todo ask if they'd like to use their current custom prefix or set a new one?
+                                    sendChatMessage(p,Component.text()
+                                            .content("You selected your custom prefix!")
+                                            .build());
+                                }
+                            }else{
+                                //the setCustom subcommand and a target were passed
+                                // test for a valid target and run the setCustom message with the target as the operator
+                                //todo check for set others perm
+                                // set other player
+
+                                logger.info("Target " + args[1] + "selected for prefix setCustom!");
+                            }
+
+                        }
+
                         break;
                 }
             }

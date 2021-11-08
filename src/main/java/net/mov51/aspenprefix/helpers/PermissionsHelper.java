@@ -19,7 +19,7 @@ import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
 public class PermissionsHelper {
 
     public static final String permissionPrefix = "AspenPrefix";
-    public static final TextComponent defaultDeny = Component.text().content("You don't have permission to run that command!").build();
+    public static final TextComponent defaultDeny = Component.text("You don't have permission to run that command!");
 
     public enum Permission{
         prefixCommand(permissionPrefix + ".command.prefix", "You aren't allowed to run the prefix command!" ,"/prefix"),
@@ -27,6 +27,7 @@ public class PermissionsHelper {
         prefixSetCommand(prefixCommand.key + ".set", "/prefix set"),
         prefixAddition(permissionPrefix + "\\.prefix\\..+"),
         customPrefixOwn(permissionPrefix + ".setOwnCustom"),
+        prefixSetCustomCommand(customPrefixOwn.key, "You don't have permission to set a custom prefix. Sorry!", "/prefix setCustom"),
         customPrefixOther(permissionPrefix + ".setOtherCustom");
 
 
@@ -55,7 +56,9 @@ public class PermissionsHelper {
         if(p.hasPermission(permission.key)){
             return true;
         }
-        sendChatMessage(p,permission.denyMessage);
+        if(permission.denyMessage != null){
+            sendChatMessage(p,permission.denyMessage);
+        }
         logger.info("player " + p + " does not have permission " + permission.key + " for command " + permission.command);
         return false;
     }
