@@ -26,9 +26,11 @@ public class PermissionsHelper {
         prefixListCommand(prefixCommand.key + ".list", "/prefix list"),
         prefixSetCommand(prefixCommand.key + ".set", "/prefix set"),
         prefixAddition(permissionPrefix + "\\.prefix\\..+"),
+        prefixSetCustomCommand(permissionPrefix + ".setOwnCustom", "You don't have permission to set a custom prefix. Sorry!", "/prefix setCustom"),
+
         customPrefixOwn(permissionPrefix + ".setOwnCustom"),
-        prefixSetCustomCommand(customPrefixOwn.key, "You don't have permission to set a custom prefix. Sorry!", "/prefix setCustom"),
-        customPrefixOther(permissionPrefix + ".setOtherCustom");
+        prefixSetOther(permissionPrefix + ".setOther"),
+        prefixListOther(permissionPrefix + ".listOther");
 
 
         public final String key;

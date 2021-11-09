@@ -2,6 +2,7 @@ package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -66,10 +67,10 @@ public class PrefixCommand implements CommandExecutor {
                                             .build());
                                     sendBarMessage(p);
                                     if(hasPermission(p,customPrefixOwn)){
-                                        sendChatMessage(p,(buildCommandComponent("Custom", StringUtils.center("/prefix setCustom",53))));
+                                        sendChatMessage(p,(buildCommandComponent("Custom", "/prefix setCustom")));
                                     }
                                     for (String prefix :  getAllPrefixes(p)) {
-                                        sendChatMessage(p,(buildCommandComponent(prefix, StringUtils.center("/prefix set " + prefix,53))));
+                                        sendChatMessage(p,(buildCommandComponent(prefix,"/prefix set " + prefix)));
                                     }
                                     sendBarMessage(p);
                                 }else{
@@ -77,6 +78,31 @@ public class PrefixCommand implements CommandExecutor {
                                     // test for a valid target and list their prefixes
                                     //todo list the prefixes for the target
                                     logger.info("Target " + args[1] + "selected for prefix list!");
+                                    if(hasPermission(p,prefixListOther)){
+                                        Player targetPlayer = Bukkit.getPlayer(args[1]);
+                                        if(targetPlayer != null){
+                                            //todo color the player name
+                                            sendChatMessage(p,Component.text()
+                                                    .content("These are the prefixes " + targetPlayer.getName() + " has!")
+                                                    .build());
+                                            sendChatMessage(p,Component.text()
+                                                    .content("Which one would you like " + targetPlayer.getName() + " to use?")
+                                                    .build());
+                                            sendBarMessage(p);
+                                            if(hasPermission(targetPlayer,customPrefixOwn)){
+                                                sendChatMessage(p,(buildCommandComponent("Custom", "/prefix setCustom" + " " + targetPlayer.getName())));
+                                            }
+                                            for (String prefix :  getAllPrefixes(targetPlayer)) {
+                                                sendChatMessage(p,(buildCommandComponent(prefix, "/prefix set " + prefix + " " + targetPlayer.getName())));
+                                            }
+                                            sendBarMessage(p);
+
+                                        }else{
+                                            sendChatMessage(p,Component.text()
+                                                    .content("That player isn't online!")
+                                                    .build());
+                                        }
+                                    }
                                 }
 
                             }
@@ -104,6 +130,13 @@ public class PrefixCommand implements CommandExecutor {
                                         sendChatMessage(p,Component.text()
                                                 .content("You selected your " + args[1] + " prefix!")
                                                 .build());
+                                    }else{
+                                        sendChatMessage(p,Component.text()
+                                                .content("That prefix doesn't exist!!")
+                                                .build());
+                                        sendChatMessage(p,Component.text()
+                                                .content("Please use the 'prefix list' command to set select the prefix you want!")
+                                                .build());
                                     }
 
                                 } else{
@@ -112,6 +145,31 @@ public class PrefixCommand implements CommandExecutor {
                                     //todo check for set others perm
                                     // set other player
                                     logger.info("Target " + args[2] + "selected for prefix set!");
+                                    if(hasPermission(p,prefixSetOther)){
+                                        Player targetPlayer = Bukkit.getPlayer(args[2]);
+                                        if(targetPlayer != null){
+                                            if(isPrefixDefined(args[1])){
+                                                setSelected(targetPlayer,args[1]);
+                                                sendChatMessage(p,Component.text()
+                                                        .content("You set the prefix for " + targetPlayer.getName() + " to " + args[1] + "!")
+                                                        .build());
+                                                sendChatMessage(targetPlayer,Component.text()
+                                                        .content("Your prefix has been set to " + args[1] + "!")
+                                                        .build());
+                                            }else{
+                                                sendChatMessage(p,Component.text()
+                                                        .content("That prefix doesn't exist!!")
+                                                        .build());
+                                                sendChatMessage(p,Component.text()
+                                                        .content("Please use the 'prefix list <player>' command to set select the prefix you want!")
+                                                        .build());
+                                            }
+                                        }else{
+                                            sendChatMessage(p,Component.text()
+                                                    .content("That player isn't online!")
+                                                    .build());
+                                        }
+                                    }
 
                                 }
                             } else{
