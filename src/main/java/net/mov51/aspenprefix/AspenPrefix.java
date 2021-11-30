@@ -2,6 +2,7 @@ package net.mov51.aspenprefix;
 
 import net.luckperms.api.LuckPerms;
 import net.mov51.aspenprefix.commands.PrefixCommand;
+import net.mov51.aspenprefix.helpers.PlayerResponseListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,10 +18,13 @@ public final class AspenPrefix extends JavaPlugin {
     public static Logger logger;
     public static org.bukkit.plugin.Plugin plugin = null;
 
+    public static PlayerResponseListener playerResponseListener = PlayerResponseListener.getInstance();
+
     @Override
     public void onEnable() {
         plugin=this;
         logger = AspenPrefix.plugin.getLogger();
+
 
         plugin.saveDefaultConfig();
 
@@ -35,8 +39,10 @@ public final class AspenPrefix extends JavaPlugin {
             new AspenPrefixPlaceholders(this).register();
         }
 
+        getServer().getPluginManager().registerEvents(new PlayerResponseListener(), this);
         Objects.requireNonNull(this.getCommand("prefix")).setExecutor(new PrefixCommand());
-        logger.info("You've been PREFIXED!");
+        logger.info("You have been...");
+        logger.info("PREFIXED!");
     }
 
     @Override

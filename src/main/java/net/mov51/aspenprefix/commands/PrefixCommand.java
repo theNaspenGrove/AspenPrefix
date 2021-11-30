@@ -1,7 +1,6 @@
 package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,12 +10,12 @@ import org.jetbrains.annotations.NotNull;
 
 
 import static net.mov51.aspenprefix.AspenPrefix.logger;
+import static net.mov51.aspenprefix.AspenPrefix.playerResponseListener;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.*;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.getAllPrefixes;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.hasPermission;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.getSelected;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.setSelected;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
+import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 import static net.mov51.aspenprefix.helpers.messageHelper.*;
 
 public class PrefixCommand implements CommandExecutor {
@@ -31,7 +30,7 @@ public class PrefixCommand implements CommandExecutor {
             Player p = (Player) sender;
             if(args.length == 0){
                 if(hasPermission(p,prefixCommand)){
-                    if(getSelected(p).isEmpty()){
+                    if(getSelectedPrefix(p).isEmpty()){
                         sendChatMessage(p,Component.text().content("You don't have a selected prefix!").build());
                         sendChatMessage(p, Component.text()
                                 .content("If you'd like to select one, ")
@@ -39,7 +38,7 @@ public class PrefixCommand implements CommandExecutor {
                                 .build());
                     }else{
                         sendChatMessage(p,Component.text()
-                                .content("your prefix is " + getSelected(p) + "!")
+                                .content("your prefix is " + getSelectedPrefix(p) + "!")
                                 .build());
                         sendChatMessage(p, Component.text()
                                 .content("If you'd like to select another one, ")
@@ -126,7 +125,7 @@ public class PrefixCommand implements CommandExecutor {
                                     //the set subcommand and the desired prefix were passed
                                     // check for permission and set the current senders prefix
                                     if(isPrefixDefined(args[1])){
-                                        setSelected(p,args[1]);
+                                        setSelectedPrefix(p,args[1]);
                                         sendChatMessage(p,Component.text()
                                                 .content("You selected your " + args[1] + " prefix!")
                                                 .build());
@@ -149,7 +148,7 @@ public class PrefixCommand implements CommandExecutor {
                                         Player targetPlayer = Bukkit.getPlayer(args[2]);
                                         if(targetPlayer != null){
                                             if(isPrefixDefined(args[1])){
-                                                setSelected(targetPlayer,args[1]);
+                                                setSelectedPrefix(targetPlayer,args[1]);
                                                 sendChatMessage(p,Component.text()
                                                         .content("You set the prefix for " + targetPlayer.getName() + " to " + args[1] + "!")
                                                         .build());
@@ -196,9 +195,15 @@ public class PrefixCommand implements CommandExecutor {
 
                                 if(hasPermission(p,prefixSetCustomCommand)){
                                     //todo ask if they'd like to use their current custom prefix or set a new one?
-                                    sendChatMessage(p,Component.text()
-                                            .content("You selected your custom prefix!")
-                                            .build());
+                                    if(getCustomPrefix(p).isEmpty()){
+                                        sendChatMessage(p,Component.text()
+                                                .content("You don't have a Custom Prefix defined!")
+                                                .build());
+                                        sendChatMessage(p,Component.text().content("If you'd like to define one, ")
+                                                        .append(buildCommandComponent("Click Here", "/prefix setCustom")
+                                                        ).build());
+                                    }
+                                    playerResponseListener.watchPlayer(p);
                                 }
                             }else{
                                 //the setCustom subcommand and a target were passed

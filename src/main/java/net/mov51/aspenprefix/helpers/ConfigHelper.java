@@ -17,11 +17,11 @@ public class ConfigHelper {
         return prefixes.contains(prefix);
     }
 
-    public static String getPrefix(String requestedPrefix){
-        if(isPrefixDefined(requestedPrefix)){
-            return c.getString("Prefixes." + requestedPrefix);
+    public static String getPrefixValue(String requestedPrefixName){
+        if(isPrefixDefined(requestedPrefixName)){
+            return c.getString("Prefixes." + requestedPrefixName);
         }
-        logger.warning("Requested prefix " + requestedPrefix + " didn't exist!");
+        logger.warning("Requested prefix " + requestedPrefixName + " didn't exist!");
         return " ";
     }
 }
