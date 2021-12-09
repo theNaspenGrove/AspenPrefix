@@ -1,6 +1,7 @@
 package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
+import net.mov51.aspenprefix.conversations.PrefixConversation;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +20,9 @@ import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 import static net.mov51.aspenprefix.helpers.messageHelper.*;
 
 public class PrefixCommand implements CommandExecutor {
+
+    PrefixConversation ConversationsInstance = PrefixConversation.getInstance();
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         //todo handle prefix command
@@ -30,21 +34,22 @@ public class PrefixCommand implements CommandExecutor {
             Player p = (Player) sender;
             if(args.length == 0){
                 if(hasPermission(p,prefixCommand)){
-                    if(getSelectedPrefix(p).isEmpty()){
-                        sendChatMessage(p,Component.text().content("You don't have a selected prefix!").build());
-                        sendChatMessage(p, Component.text()
-                                .content("If you'd like to select one, ")
-                                .append(buildCommandComponent("Click Here!","/prefix list"))
-                                .build());
-                    }else{
-                        sendChatMessage(p,Component.text()
-                                .content("your prefix is " + getSelectedPrefix(p) + "!")
-                                .build());
-                        sendChatMessage(p, Component.text()
-                                .content("If you'd like to select another one, ")
-                                .append(buildCommandComponent("Click Here!","/prefix list"))
-                                .build());
-                    }
+                    ConversationsInstance.PrefixOpener.buildConversation(p).begin();
+//                    if(getSelectedPrefix(p).isEmpty()){
+//                        sendChatMessage(p,Component.text().content("You don't have a selected prefix!").build());
+//                        sendChatMessage(p, Component.text()
+//                                .content("If you'd like to select one, ")
+//                                .append(buildCommandComponent("Click Here!","/prefix list"))
+//                                .build());
+//                    }else{
+//                        sendChatMessage(p,Component.text()
+//                                .content("your prefix is " + getSelectedPrefix(p) + "!")
+//                                .build());
+//                        sendChatMessage(p, Component.text()
+//                                .content("If you'd like to select another one, ")
+//                                .append(buildCommandComponent("Click Here!","/prefix list"))
+//                                .build());
+//                    }
                 }
             }else {
                 switch (args[0]){

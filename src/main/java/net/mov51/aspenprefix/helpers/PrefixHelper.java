@@ -17,6 +17,10 @@ public class PrefixHelper {
         return (getMetaValue(p,currentPrefix) == null) ? "" : getMetaValue(p,currentPrefix);
     }
 
+    public static boolean hasSelectedPrefix(Player p){
+        return !getSelectedPrefix(p).isEmpty();
+    }
+
     public static void setSelectedPrefix(Player p, String Value){
         setMetaValue(p,currentPrefix,Value);
     }
