@@ -12,6 +12,8 @@ public class ConfigHelper {
 
     public static final FileConfiguration c = AspenPrefix.plugin.getConfig();
     public static final Set<String> prefixes = Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false);
+    public static String pluginPrefix = c.getString("chat-prefix") != null ?
+            c.getString("chat-prefix") : "Aspen-Prefix";
 
     public static boolean isPrefixDefined(String prefix){
         return prefixes.contains(prefix);

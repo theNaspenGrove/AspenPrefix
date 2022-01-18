@@ -10,11 +10,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-import static net.mov51.aspenprefix.AspenPrefix.LPapi;
-import static net.mov51.aspenprefix.AspenPrefix.logger;
+import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.prefixAddition;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
-import static net.mov51.aspenprefix.helpers.messageHelper.sendChatMessage;
 
 public class PermissionsHelper {
 
@@ -24,6 +22,7 @@ public class PermissionsHelper {
     public enum Permission{
         prefixCommand(permissionPrefix + ".command.prefix", "You aren't allowed to run the prefix command!" ,"/prefix"),
         prefixListCommand(prefixCommand.key + ".list", "/prefix list"),
+        prefixSelectCommand(prefixCommand.key + ".select", "/prefix select"),
         prefixSetCommand(prefixCommand.key + ".set", "/prefix set"),
         prefixAddition(permissionPrefix + "\\.prefix\\..+"),
         prefixSetCustomCommand(permissionPrefix + ".setOwnCustom", "You don't have permission to set a custom prefix. Sorry!", "/prefix setCustom"),
@@ -59,7 +58,7 @@ public class PermissionsHelper {
             return true;
         }
         if(permission.denyMessage != null){
-            sendChatMessage(p,permission.denyMessage);
+            chatHelper.sendChat(p,permission.denyMessage);
         }
         logger.info("player " + p + " does not have permission " + permission.key + " for command " + permission.command);
         return false;

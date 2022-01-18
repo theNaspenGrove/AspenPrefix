@@ -2,13 +2,16 @@ package net.mov51.aspenprefix;
 
 import net.luckperms.api.LuckPerms;
 import net.mov51.aspenprefix.commands.PrefixCommand;
-import net.mov51.aspenprefix.helpers.PlayerResponseListener;
+import net.mov51.periderm.luckperms.AspenLuckPermsHelper;
+import net.mov51.periderm.paper.chat.AspenChatHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import static net.mov51.aspenprefix.helpers.ConfigHelper.pluginPrefix;
 
 public final class AspenPrefix extends JavaPlugin {
 
@@ -17,13 +20,15 @@ public final class AspenPrefix extends JavaPlugin {
     //register plugin
     public static Logger logger;
     public static org.bukkit.plugin.Plugin plugin = null;
-
-    public static PlayerResponseListener playerResponseListener = PlayerResponseListener.getInstance();
+    public static AspenChatHelper chatHelper;
+    public static AspenLuckPermsHelper metaHelper;
 
     @Override
     public void onEnable() {
         plugin=this;
         logger = AspenPrefix.plugin.getLogger();
+        chatHelper = new AspenChatHelper(pluginPrefix);
+        metaHelper = new AspenLuckPermsHelper(logger,"AspenPrefix");
 
 
         plugin.saveDefaultConfig();
@@ -39,7 +44,6 @@ public final class AspenPrefix extends JavaPlugin {
             new AspenPrefixPlaceholders(this).register();
         }
 
-        getServer().getPluginManager().registerEvents(new PlayerResponseListener(), this);
         Objects.requireNonNull(this.getCommand("prefix")).setExecutor(new PrefixCommand());
         logger.info("You have been...");
         logger.info("PREFIXED!");

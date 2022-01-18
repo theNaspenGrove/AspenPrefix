@@ -1,47 +1,57 @@
 package net.mov51.aspenprefix.helpers;
 
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.mov51.periderm.luckperms.AspenMetaKey;
 import org.bukkit.entity.Player;
 
-import static net.mov51.aspenprefix.helpers.LPMetaHelper.MetaKey.currentPrefix;
-import static net.mov51.aspenprefix.helpers.LPMetaHelper.MetaKey.customPrefix;
-import static net.mov51.aspenprefix.helpers.LPMetaHelper.getMetaValue;
-import static net.mov51.aspenprefix.helpers.LPMetaHelper.setMetaValue;
+import static net.mov51.aspenprefix.AspenPrefix.metaHelper;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
 import static net.mov51.aspenprefix.helpers.PermissionsHelper.getAllPrefixes;
 
+
 public class PrefixHelper {
 
-    private static final String customPrefixKey = "CustomPrefix";
+    public static AspenMetaKey currentPrefix = new AspenMetaKey("CurrentPrefix");
+    public static AspenMetaKey customPrefix = new AspenMetaKey("CustomPrefix");
 
     public static String getSelectedPrefix(Player p){
-        return (getMetaValue(p,currentPrefix) == null) ? "" : getMetaValue(p,currentPrefix);
+        return metaHelper.getMetaValue(p,currentPrefix);
     }
 
     public static boolean hasSelectedPrefix(Player p){
-        return !getSelectedPrefix(p).isEmpty();
+        return getSelectedPrefix(p) == null;
     }
 
     public static void setSelectedPrefix(Player p, String Value){
-        setMetaValue(p,currentPrefix,Value);
+        metaHelper.setMetaValue(p,currentPrefix,Value);
     }
 
     public static void setCustomPrefix(Player p, String Value){
-        setMetaValue(p,customPrefix,Value);
+        metaHelper.setMetaValue(p,customPrefix,Value);
     }
 
     public static String getCustomPrefix(Player p) {
-        return (getMetaValue(p,customPrefix) == null) ? "" : getMetaValue(p,customPrefix);
+        return metaHelper.getMetaValue(p,customPrefix);
+    }
+
+    public static boolean hasCustomPrefix(Player p) {
+        return metaHelper.getMetaValue(p,customPrefix) == null;
+    }
+
+    public static TextComponent getPrefixAsComponent(String prefix){
+        return LegacyComponentSerializer.legacyAmpersand().deserialize(prefix);
     }
 
     public static String getCurrentPrefix(Player p){
-        if(getSelectedPrefix(p).isEmpty()){
+        if(hasSelectedPrefix(p)){
             //if no prefix is selected,
             // get the value of the first prefix sorted by weight
             return getPrefixValue(getAllPrefixes(p).get(0));
-        }else if(getSelectedPrefix(p).equals(customPrefixKey)){
+        }else if(getSelectedPrefix(p).equals(customPrefix.getKey())){
             //if the selected prefix is equal to the customPrefixKey
             // then return the value of the custom prefix
-            return getPrefixValue(getCustomPrefix(p));
+            return getCustomPrefix(p);
         }else
             //return the value of the selected prefix
             return getPrefixValue(getSelectedPrefix(p));
