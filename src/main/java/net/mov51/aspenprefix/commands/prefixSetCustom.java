@@ -1,14 +1,21 @@
 package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
+import net.mov51.periderm.paper.chat.PredefinedMessage;
+import net.mov51.periderm.paper.permissions.Perm;
 import org.bukkit.entity.Player;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
-import static net.mov51.aspenprefix.helpers.PermissionsHelper.Permission.prefixSetCustomCommand;
-import static net.mov51.aspenprefix.helpers.PermissionsHelper.hasPermission;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 
 public class prefixSetCustom {
+
+    private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix!"));
+    private static final Perm prefixSetCustomOwn = new Perm("prefixSetCustom", denyMessageOwn);
+
+//    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix for others!"));
+//    private static final Perm prefixSetCustomOther = new Perm("prefixSetCustomOther", denyMessageOther);
+
     public static boolean command(Player p, String[] args){
         if(args.length <= 3){
             //args should be a maximum of 2
@@ -18,7 +25,7 @@ public class prefixSetCustom {
                 //the setCustom subcommand was passed
                 // check for permission and send setCustom message
 
-                if(hasPermission(p,prefixSetCustomCommand)){
+                if(permHelper.hasPermission(p,prefixSetCustomOwn)){
                     //todo ask if they'd like to use their current custom prefix or set a new one?
                     if(hasCustomPrefix(p)){
                         chatHelper.sendChat(p, Component.text()
@@ -27,7 +34,7 @@ public class prefixSetCustom {
                         chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to make one")
-                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new"))
+                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
                                         .build());
                     }else{
                         chatHelper.sendChat(p, Component.text()
@@ -37,22 +44,19 @@ public class prefixSetCustom {
                         chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to use that one, ")
-                                        .append(chatHelper.buildRunCommandComponent("Click Here!","/prefix setCustom select"))
+                                        .append(chatHelper.buildRunCommandComponent("Click Here!","/prefix setCustom select", true))
                                         .build());
                         chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to make a new one, ")
-                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new"))
+                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
                                         .build());
                     }
                 }
             }else{
-                //the setCustom subcommand and a target were passed
-                // test for a valid target and run the setCustom message with the target as the operator
-                //todo check for set others perm
-                // set other player
                 switch (args[1]){
                     case "new":
+                        //creating a new prefix and overriding the old one
                         if(args.length == 3){
                             setCustomPrefix(p,args[2]);
                             setSelectedPrefix(p,customPrefix.getKey());
@@ -62,13 +66,15 @@ public class prefixSetCustom {
                         }
                         return true;
                     case "select":
+                        //selecting the current custom prefix
                         setSelectedPrefix(p,customPrefix.getKey());
                         chatHelper.sendChat(p,"You've selected your custom prefix, " + getCustomPrefix(p) + "!");
                         return true;
+                    default:
+                        //todo command help
+                        break;
                 }
-                logger.info("Target " + args[1] + "selected for prefix setCustom!");
             }
-
         }
         return true;
     }

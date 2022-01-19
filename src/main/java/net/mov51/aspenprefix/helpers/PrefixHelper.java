@@ -2,12 +2,18 @@ package net.mov51.aspenprefix.helpers;
 
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.Node;
+import net.luckperms.api.query.QueryOptions;
 import net.mov51.periderm.luckperms.AspenMetaKey;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import static net.mov51.aspenprefix.AspenPrefix.metaHelper;
+import java.util.ArrayList;
+
+import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
-import static net.mov51.aspenprefix.helpers.PermissionsHelper.getAllPrefixes;
+import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
 
 
 public class PrefixHelper {
@@ -57,4 +63,20 @@ public class PrefixHelper {
             return getPrefixValue(getSelectedPrefix(p));
     }
 
+    public static ArrayList<String> getAllPrefixes(Player p){
+        User user = LPapi.getPlayerAdapter(Player.class).getUser(p);
+        ArrayList<String> prefixes = new ArrayList<>();
+
+        for(Node n : user.resolveInheritedNodes(QueryOptions.nonContextual())){
+            if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
+                String prefix = n.getKey().split("\\.")[2];
+                if(isPrefixDefined(prefix)){
+                    prefixes.add(prefix);
+                }else{
+                    logger.warning(ChatColor.RED + "Prefix " + prefix + " is not defined in the config but you have a permission node for it!");
+                }
+            }
+        }
+        return prefixes;
+    }
 }
