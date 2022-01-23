@@ -27,7 +27,7 @@ public class AspenPrefixPlaceholders extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.0.0";
+        return "${project.version}";
     }
 
     @Override

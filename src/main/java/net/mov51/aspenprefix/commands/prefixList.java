@@ -14,11 +14,11 @@ public class prefixList {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text(
             "You don't have permission to list your prefixes!!"));
-    private static final Perm prefixListOwn = new Perm("prefixList", denyMessageOwn);
+    public static final Perm prefixListOwn = new Perm("prefixList", denyMessageOwn, "list");
 
-    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text(
-            "You don't have permission to list the prefixes of another player!"));
-    private static final Perm prefixListOther = new Perm("prefixList", denyMessageOther);
+//    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text(
+//            "You don't have permission to list the prefixes of another player!"));
+//    private static final Perm prefixListOther = new Perm("prefixListOther", denyMessageOther);
 
     public static boolean command(Player p, String[] args){
         if(permHelper.hasPermission(p,prefixListOwn)){
@@ -51,7 +51,7 @@ public class prefixList {
             }
         }
         for (String prefix :  getAllPrefixes(p)) {
-            chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix set " + prefix) ));
+            chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix select " + prefix) ));
         }
         chatHelper.sendBarMessage(p);
     }

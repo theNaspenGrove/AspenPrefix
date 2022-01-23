@@ -22,12 +22,6 @@ public class PrefixCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        //todo handle prefix command
-        //todo select prefix via chat
-        // doesn't use extra commands, it's ask and answer
-        // maybe have a sub command system for faster selection
-
-
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if(args.length == 0){
@@ -57,11 +51,11 @@ public class PrefixCommand implements CommandExecutor {
                     case "list":
                         //prefix list[0] <player>[1]
                         return prefixList.command(p,args);
-                    case "set":
-                        //prefix set[0] <prefix>[1] <player>[2]
+                    case "select":
+                        //prefix select[0] <prefix>[1]
                         return prefixSelect.command(p,args);
                     case"setCustom":
-                        //prefix setCustom[0] <player>[1]
+                        //prefix setCustom[0] <option>[1] <prefix>[2]
                         return prefixSetCustom.command(p,args);
                     default:
                         //todo command help

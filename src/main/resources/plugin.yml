@@ -8,6 +8,20 @@ authors: [mov51]
 website: mov51.net
 commands:
   prefix:
-    description: Main prefix COMMAND
+    description: Primary prefix command
     usage: /prefix
-    permission: AspenPrefix.command.prefix
+    permission: prefixCommand
+
+permissions:
+  AspenPrefix.prefixCommand:
+    description: Ability to run the Prefix command. Required for all sub-commands
+    default: false
+  AspenPrefix.prefixList:
+    description: Ability to list the prefixes you have access to. Requires the 'AspenPrefix.prefixCommand' permission
+    default: true
+  AspenPrefix.prefixSelect:
+    description: Ability to select the prefix you want to use out of a list of the prefixes you have accses to. Requires the 'AspenPrefix.prefixCommand' permission
+    default: true
+  AspenPrefix.prefixSetCustom:
+    description: Ability to set your own custom prefix. Requires the 'AspenPrefix.prefixCommand' permission
+    default: true

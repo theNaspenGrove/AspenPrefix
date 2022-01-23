@@ -11,7 +11,7 @@ import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 public class prefixSetCustom {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix!"));
-    private static final Perm prefixSetCustomOwn = new Perm("prefixSetCustom", denyMessageOwn);
+    public static final Perm prefixSetCustomOwn = new Perm("prefixSetCustom", denyMessageOwn,"setCustom");
 
 //    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix for others!"));
 //    private static final Perm prefixSetCustomOther = new Perm("prefixSetCustomOther", denyMessageOther);
@@ -26,7 +26,6 @@ public class prefixSetCustom {
                 // check for permission and send setCustom message
 
                 if(permHelper.hasPermission(p,prefixSetCustomOwn)){
-                    //todo ask if they'd like to use their current custom prefix or set a new one?
                     if(hasCustomPrefix(p)){
                         chatHelper.sendChat(p, Component.text()
                                 .content("You don't have a Custom Prefix defined!")

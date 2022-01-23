@@ -8,14 +8,13 @@ import org.bukkit.entity.Player;
 import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.getPrefixAsComponent;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.setSelectedPrefix;
+import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 
 public class prefixSelect {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text(
             "You don't have permission to select a prefix!"));
-    private static final Perm prefixSelectOwn = new Perm("prefixSelect", denyMessageOwn);
+    public static final Perm prefixSelectOwn = new Perm("prefixSelect", denyMessageOwn, "select");
 
 //    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text(
 //            "You don't have permission to select a prefix for others!"));
@@ -39,20 +38,27 @@ public class prefixSelect {
                 } else if (args.length == 2) {
                     //the set subcommand and the desired prefix were passed
                     // check for permission and set the current senders prefix
-                    if (isPrefixDefined(args[1])) {
-                        setSelectedPrefix(p, args[1]);
+                    if(args[1].equalsIgnoreCase("Custom")){
+                        setSelectedPrefix(p,customPrefix.getKey());
                         chatHelper.sendChat(p, Component.text()
-                                .content("You selected your ")
-                                .append(getPrefixAsComponent(getPrefixValue(args[1])))
-                                .append(Component.text(" prefix!"))
+                                .content("You selected your Custom prefix that looks like this ")
+                                .append(getPrefixAsComponent(getCustomPrefix(p)))
                                 .build());
-                    } else {
-                        chatHelper.sendChat(p, Component.text()
-                                .content("That prefix doesn't exist!")
-                                .build());
-                        chatHelper.sendChat(p,useTheListCommand);
+                    }else{
+                        if (isPrefixDefined(args[1])) {
+                            setSelectedPrefix(p, args[1]);
+                            chatHelper.sendChat(p, Component.text()
+                                    .content("You selected your ")
+                                    .append(getPrefixAsComponent(getPrefixValue(args[1])))
+                                    .append(Component.text(" prefix!"))
+                                    .build());
+                        } else {
+                            chatHelper.sendChat(p, Component.text()
+                                    .content("That prefix doesn't exist!")
+                                    .build());
+                            chatHelper.sendChat(p,useTheListCommand);
+                        }
                     }
-
                 }
                 //todo command help
             }

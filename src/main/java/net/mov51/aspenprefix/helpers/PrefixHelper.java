@@ -42,7 +42,7 @@ public class PrefixHelper {
     }
 
     public static boolean hasCustomPrefix(Player p) {
-        return metaHelper.getMetaValue(p,customPrefix) == null;
+        return metaHelper.getMetaValue(p,customPrefix) != null;
     }
 
     public static TextComponent getPrefixAsComponent(String prefix){
