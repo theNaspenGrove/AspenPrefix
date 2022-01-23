@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
+import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
 
 
 public class PrefixHelper {
@@ -26,7 +25,7 @@ public class PrefixHelper {
     }
 
     public static boolean hasSelectedPrefix(Player p){
-        return getSelectedPrefix(p) == null;
+        return getSelectedPrefix(p) != null;
     }
 
     public static void setSelectedPrefix(Player p, String Value){
@@ -50,7 +49,7 @@ public class PrefixHelper {
     }
 
     public static String getCurrentPrefix(Player p){
-        if(hasSelectedPrefix(p)){
+        if(!hasSelectedPrefix(p)){
             //if no prefix is selected,
             // get the value of the first prefix sorted by weight
             return getPrefixValue(getAllPrefixes(p).get(0));
@@ -77,6 +76,7 @@ public class PrefixHelper {
                 }
             }
         }
+
         return prefixes;
     }
 }
