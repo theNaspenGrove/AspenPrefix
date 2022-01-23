@@ -35,7 +35,7 @@ public class PrefixCommand implements CommandExecutor {
                                         .build());
                     }else{
                         chatHelper.sendChat(p,Component.text()
-                                .content("your prefix is ")
+                                .content("your prefix is: ")
                                 .append(getPrefixAsComponent(getCurrentPrefix(p)))
                                         .append(Component.text("!"))
                                 .build());

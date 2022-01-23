@@ -41,16 +41,16 @@ public class prefixSelect {
                     if(args[1].equalsIgnoreCase("Custom")){
                         setSelectedPrefix(p,customPrefix.getKey());
                         chatHelper.sendChat(p, Component.text()
-                                .content("You selected your Custom prefix that looks like this ")
+                                .content("You selected your Custom prefix that looks like this: ")
                                 .append(getPrefixAsComponent(getCustomPrefix(p)))
                                 .build());
                     }else{
                         if (isPrefixDefined(args[1])) {
                             setSelectedPrefix(p, args[1]);
                             chatHelper.sendChat(p, Component.text()
-                                    .content("You selected your ")
+                                    .content("You selected your '")
                                     .append(getPrefixAsComponent(getPrefixValue(args[1])))
-                                    .append(Component.text(" prefix!"))
+                                    .append(Component.text("' prefix!"))
                                     .build());
                         } else {
                             chatHelper.sendChat(p, Component.text()

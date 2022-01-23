@@ -32,12 +32,12 @@ public class prefixSetCustom {
                                 .build());
                         chatHelper.sendChat(p,
                                 Component.text()
-                                        .content("If you'd like to make one")
+                                        .content("If you'd like to make one, ")
                                         .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
                                         .build());
                     }else{
                         chatHelper.sendChat(p, Component.text()
-                                .content("Your custom prefix is ")
+                                .content("Your custom prefix is: ")
                                 .append(getPrefixAsComponent(getCustomPrefix(p)))
                                 .build());
                         chatHelper.sendChat(p,
@@ -48,7 +48,8 @@ public class prefixSetCustom {
                         chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to make a new one, ")
-                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
+                                        .append(chatHelper.buildSuggestCommandComponent("Click Here","/prefix setCustom new ", true))
+                                        .append(Component.text(" and add the prefix you want to the end of the command!"))
                                         .build());
                     }
                 }
@@ -59,7 +60,7 @@ public class prefixSetCustom {
                         if(args.length == 3){
                             setCustomPrefix(p,args[2]);
                             setSelectedPrefix(p,customPrefix.getKey());
-                            chatHelper.sendChat(p,"Your prefix has been set to " + getCustomPrefix(p));
+                            chatHelper.sendChat(p,"Your prefix has been set to: " + getCustomPrefix(p));
                         }else{
                             chatHelper.sendChat(p,"Please specify a new Custom Prefix!");
                         }
@@ -67,7 +68,7 @@ public class prefixSetCustom {
                     case "select":
                         //selecting the current custom prefix
                         setSelectedPrefix(p,customPrefix.getKey());
-                        chatHelper.sendChat(p,"You've selected your custom prefix, " + getCustomPrefix(p) + "!");
+                        chatHelper.sendChat(p,"You've selected your custom prefix: " + getCustomPrefix(p));
                         return true;
                     default:
                         //todo command help
