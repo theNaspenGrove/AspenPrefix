@@ -34,7 +34,7 @@ public final class AspenPrefix extends JavaPlugin {
         logger = AspenPrefix.plugin.getLogger();
         chatHelper = new AspenChatHelper(pluginPrefix);
         metaHelper = new AspenLuckPermsHelper(logger,"AspenPrefix");
-        permHelper = new PermissionHelper("AspenPrefix",
+        permHelper = new PermissionHelper("AspenPrefix.",
                 new PredefinedMessage(Component.text("You don't have permission to run that command!")));
 
 

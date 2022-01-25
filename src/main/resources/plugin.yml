@@ -10,7 +10,7 @@ commands:
   prefix:
     description: Primary prefix command
     usage: /prefix
-    permission: prefixCommand
+    permission: AspenPrefix.prefixCommand
 
 permissions:
   AspenPrefix.prefixCommand:
@@ -24,4 +24,4 @@ permissions:
     default: true
   AspenPrefix.prefixSetCustom:
     description: Ability to set your own custom prefix. Requires the 'AspenPrefix.prefixCommand' permission
-    default: true
+    default: false
