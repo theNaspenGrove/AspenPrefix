@@ -65,8 +65,8 @@ public class PrefixHelper {
     public static ArrayList<String> getAllPrefixes(Player p){
         User user = LPapi.getPlayerAdapter(Player.class).getUser(p);
         ArrayList<String> prefixes = new ArrayList<>();
-
-        for(Node n : user.resolveInheritedNodes(QueryOptions.nonContextual())){
+        QueryOptions queryOptions = LPapi.getContextManager().getQueryOptions(p);
+        for(Node n : user.resolveInheritedNodes(queryOptions)){
             if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
                 String prefix = n.getKey().split("\\.")[2];
                 if(isPrefixDefined(prefix)){
