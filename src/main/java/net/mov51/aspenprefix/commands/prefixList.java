@@ -6,6 +6,7 @@ import net.mov51.periderm.paper.permissions.Perm;
 import org.bukkit.entity.Player;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
+import static net.mov51.aspenprefix.commands.prefixSetCustom.prefixSetCustomOwn;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.getAllPrefixes;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
@@ -43,13 +44,13 @@ public class prefixList {
 
     private static void listToSelect(Player p){
         chatHelper.sendBarMessage(p);
-        if(permHelper.hasPermission(p ,prefixListOwn)){
-            if(hasCustomPrefix(p)){
-                chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom)", "/prefix setCustom")));
-            }else{
-                chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom) " + getCustomPrefix(p), "/prefix setCustom")));
+            if(permHelper.hasPermission(p,prefixSetCustomOwn)){
+                if(hasCustomPrefix(p)){
+                    chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom) " + getCustomPrefix(p), "/prefix setCustom")));
+                }else{
+                    chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom)", "/prefix setCustom")));
+                }
             }
-        }
         for (String prefix :  getAllPrefixes(p)) {
             chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix select " + prefix) ));
         }

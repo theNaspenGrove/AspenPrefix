@@ -28,15 +28,6 @@ public class prefixSetCustom {
                 if(permHelper.hasPermission(p,prefixSetCustomOwn)){
                     if(hasCustomPrefix(p)){
                         chatHelper.sendChat(p, Component.text()
-                                .content("You don't have a Custom Prefix defined!")
-                                .build());
-                        chatHelper.sendChat(p,
-                                Component.text()
-                                        .content("If you'd like to make one, ")
-                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
-                                        .build());
-                    }else{
-                        chatHelper.sendChat(p, Component.text()
                                 .content("Your custom prefix is: ")
                                 .append(getPrefixAsComponent(getCustomPrefix(p)))
                                 .build());
@@ -50,6 +41,15 @@ public class prefixSetCustom {
                                         .content("If you'd like to make a new one, ")
                                         .append(chatHelper.buildSuggestCommandComponent("Click Here","/prefix setCustom new ", true))
                                         .append(Component.text(" and add the prefix you want to the end of the command!"))
+                                        .build());
+                    }else{
+                        chatHelper.sendChat(p, Component.text()
+                                .content("You don't have a Custom Prefix defined!")
+                                .build());
+                        chatHelper.sendChat(p,
+                                Component.text()
+                                        .content("If you'd like to make one, ")
+                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
                                         .build());
                     }
                 }
