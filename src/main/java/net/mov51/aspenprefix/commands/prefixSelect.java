@@ -6,8 +6,7 @@ import net.mov51.periderm.paper.permissions.Perm;
 import org.bukkit.entity.Player;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.isPrefixDefined;
+import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 
 public class prefixSelect {
@@ -15,6 +14,7 @@ public class prefixSelect {
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text(
             "You don't have permission to select a prefix!"));
     public static final Perm prefixSelectOwn = new Perm("prefixSelect", denyMessageOwn, "select");
+    public static final String customPrefixTarget = "custom-prefix";
 
 //    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text(
 //            "You don't have permission to select a prefix for others!"));
@@ -38,13 +38,19 @@ public class prefixSelect {
                 } else if (args.length == 2) {
                     //the set subcommand and the desired prefix were passed
                     // check for permission and set the current senders prefix
-                    if(args[1].equalsIgnoreCase("Custom")){
+                    if(args[1].equalsIgnoreCase(defaultPrefixTarget)){
                         setSelectedPrefix(p,customPrefix.getKey());
                         chatHelper.sendChat(p, Component.text()
                                 .content("You selected your Custom prefix that looks like this: ")
                                 .append(getPrefixAsComponent(getCustomPrefix(p)))
                                 .build());
-                    }else{
+                    }else if(args[1].equalsIgnoreCase(customPrefixTarget)){
+                        setSelectedPrefix(p,defaultPlayerPrefix);
+                        chatHelper.sendChat(p, Component.text()
+                                .content("You selected the Default prefix because you don't have access to any other prefixes. It looks like this: ")
+                                .append(getPrefixAsComponent(defaultPlayerPrefix))
+                                .build());
+                    } else{
                         if (isPrefixDefined(args[1])) {
                             setSelectedPrefix(p, args[1]);
                             chatHelper.sendChat(p, Component.text()

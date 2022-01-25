@@ -76,7 +76,9 @@ public class PrefixHelper {
                 }
             }
         }
-
+        if(prefixes.isEmpty()){
+            prefixes.add(defaultPrefixTarget);
+        }
         return prefixes;
     }
 }

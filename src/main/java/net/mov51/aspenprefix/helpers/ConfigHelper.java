@@ -15,6 +15,7 @@ public class ConfigHelper {
     public static String pluginPrefix = c.getString("chat-prefix") != null ?
             c.getString("chat-prefix") : "Aspen-Prefix";
     public static String defaultPlayerPrefix = c.getString("default-prefix");
+    public static final String defaultPrefixTarget = "default-prefix";
 
     public static boolean isPrefixDefined(String prefix){
         return prefixes.contains(prefix);
@@ -23,6 +24,8 @@ public class ConfigHelper {
     public static String getPrefixValue(String requestedPrefixName){
         if(isPrefixDefined(requestedPrefixName)){
             return c.getString("Prefixes." + requestedPrefixName);
+        }else if(requestedPrefixName.equals(defaultPrefixTarget)){
+            return defaultPlayerPrefix;
         }
         logger.warning("Requested prefix " + requestedPrefixName + " didn't exist!");
         return " ";
