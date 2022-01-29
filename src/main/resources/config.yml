@@ -4,13 +4,13 @@ chat-prefix: "Aspen-Prefix"
 #prefix used if the player has no prefix permissions.
 default-prefix: '&6[&r{#812409}Spectator&6]&r'
 
-
-prefix-format: '&6[&r{#812409}$prefix&6]&r'
+#Use $prefix to place the prefix in your format.
+prefix-format: '&6[&r$prefix&6]&r'
 
 #prefixes available for players.
 #you can use the AspenPrefix.prefix.<prefixName> permission node to grant prefixes.
 Prefixes:
-  Staff: "&6[&r{#FF8317}Staff&6]&r"
-  Moderator: "&6[&r{#00c2ff}Mod&6]&r"
-  VIP: "&6[&r{#9f29ff}VIP&6]&r"
-  Guest: "&6[&r{#11806a}Player&6]&r"
+  Staff: "{#FF8317}Staff"
+  Moderator: "{#00c2ff}Mod"
+  VIP: "{#9f29ff}VIP"
+  Guest: "{#11806a}Player"
