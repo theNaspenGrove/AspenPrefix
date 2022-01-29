@@ -1,7 +1,14 @@
+#prefix used by the plugin when sending chat messages.
 chat-prefix: "Aspen-Prefix"
 
+#prefix used if the player has no prefix permissions.
 default-prefix: '&6[&r{#812409}Spectator&6]&r'
 
+
+prefix-format: '&6[&r{#812409}$prefix&6]&r'
+
+#prefixes available for players.
+#you can use the AspenPrefix.prefix.<prefixName> permission node to grant prefixes.
 Prefixes:
   Staff: "&6[&r{#FF8317}Staff&6]&r"
   Moderator: "&6[&r{#00c2ff}Mod&6]&r"

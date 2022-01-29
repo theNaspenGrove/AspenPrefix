@@ -49,6 +49,7 @@ public final class AspenPrefix extends JavaPlugin {
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new AspenPrefixPlaceholders(this).register();
+            logger.info("Placeholders holding!");
         }
 
         Objects.requireNonNull(this.getCommand("prefix")).setExecutor(new PrefixCommand());

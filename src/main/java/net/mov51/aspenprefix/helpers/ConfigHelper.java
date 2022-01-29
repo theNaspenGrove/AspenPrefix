@@ -14,6 +14,8 @@ public class ConfigHelper {
     public static final Set<String> prefixes = Objects.requireNonNull(c.getConfigurationSection("Prefixes")).getKeys(false);
     public static String pluginPrefix = c.getString("chat-prefix") != null ?
             c.getString("chat-prefix") : "Aspen-Prefix";
+    public static String prefixFormat = c.getString("prefix-format") != null ?
+            c.getString("prefix-format") : "&6[&r{#812409}$prefix&6]&r";
     public static String defaultPlayerPrefix = c.getString("default-prefix");
     public static final String defaultPrefixTarget = "default-prefix";
 
