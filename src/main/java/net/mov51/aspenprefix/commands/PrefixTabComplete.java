@@ -9,12 +9,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.mov51.aspenprefix.AspenPrefix.chatHelper;
 import static net.mov51.aspenprefix.AspenPrefix.permHelper;
 import static net.mov51.aspenprefix.commands.prefixList.prefixListOwn;
 import static net.mov51.aspenprefix.commands.prefixSelect.prefixSelectOwn;
 import static net.mov51.aspenprefix.commands.prefixSetCustom.prefixSetCustomOwn;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 
 public class PrefixTabComplete implements TabCompleter {
@@ -38,17 +36,17 @@ public class PrefixTabComplete implements TabCompleter {
     public static List<String> whatCanRun(Player p){
         ArrayList<String> l = new ArrayList<>();
         //list
-        if (permHelper.hasPermissionSilent(p, prefixListOwn)) l.add(prefixListOwn.getCommand());
+        if (permHelper.hasPermission(p, prefixListOwn,true)) l.add(prefixListOwn.getCommand());
         //select
-        if (permHelper.hasPermissionSilent(p, prefixSelectOwn)) l.add(prefixSelectOwn.getCommand());
+        if (permHelper.hasPermission(p, prefixSelectOwn,true)) l.add(prefixSelectOwn.getCommand());
         //setCustom
-        if (permHelper.hasPermissionSilent(p, prefixSetCustomOwn)) l.add(prefixSetCustomOwn.getCommand());
+        if (permHelper.hasPermission(p, prefixSetCustomOwn,true)) l.add(prefixSetCustomOwn.getCommand());
         return l;
     }
 
     public static List<String> whatPrefixes(Player p){
         ArrayList<String> l = new ArrayList<>();
-        if(permHelper.hasPermissionSilent(p, prefixSetCustomOwn) && hasCustomPrefix(p)){
+        if(permHelper.hasPermission(p, prefixSetCustomOwn,true) && hasCustomPrefix(p)){
             l.add("Custom");
         }
         l.addAll(getAllPrefixes(p));
