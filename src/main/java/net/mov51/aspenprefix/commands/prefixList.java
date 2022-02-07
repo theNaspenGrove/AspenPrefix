@@ -44,7 +44,7 @@ public class prefixList {
 
     private static void listToSelect(Player p){
         chatHelper.sendBarMessage(p);
-            if(permHelper.hasPermission(p,prefixSetCustomOwn)){
+            if(permHelper.hasPermissionSilent(p,prefixSetCustomOwn)){
                 if(hasCustomPrefix(p)){
                     chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom) " + getCustomPrefix(p), "/prefix setCustom")));
                 }else{
