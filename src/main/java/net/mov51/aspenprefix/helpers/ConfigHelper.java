@@ -17,7 +17,7 @@ public class ConfigHelper {
     public static String prefixFormat = c.getString("prefix-format") != null ?
             c.getString("prefix-format") : "&6[&r{#812409}$prefix&6]&r";
     public static String defaultPlayerPrefix = c.getString("default-prefix");
-    public static final String defaultPrefixTarget = "default-prefix";
+    public static final String defaultPrefixTarget = "0.default-prefix";
 
     public static boolean isPrefixDefined(String prefix){
         return prefixes.contains(prefix);
