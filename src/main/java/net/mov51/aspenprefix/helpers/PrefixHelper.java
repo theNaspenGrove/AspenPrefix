@@ -4,16 +4,11 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
-import net.luckperms.api.query.QueryOptions;
 import net.mov51.periderm.luckperms.AspenMetaKey;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
@@ -70,68 +65,65 @@ public class PrefixHelper {
     }
 
     public static void loadPlayerPrefixList(Player p){
-        //todo save this list to users on re-log/login.
-
         //get LP-user.
         User user = LPapi.getPlayerAdapter(Player.class).getUser(p);
-        //define prefix arraylist.
-        ArrayList<String> prefixes = new ArrayList<>();
-
-        //get query options for LuckPerms.
-        QueryOptions queryOptions = LPapi.getContextManager().getQueryOptions(p);
+        //define prefix TreeMap for unsorted prefixes to be added with their weight.
+        TreeMap<String, Integer> unsortedPrefixes = new TreeMap<>();
         //Loop through nodes selected by query options.
-        for(Node n : user.resolveInheritedNodes(queryOptions)){
+        for(Node n : user.resolveInheritedNodes(LPapi.getContextManager().getQueryOptions(p))){
             if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
                 //get Prefix Name separate from weight.
                 String prefixName = n.getKey().split("\\.")[3];
-                //add weight to prefix name for processing later on.
-                String prefix = n.getKey().split("\\.")[2] + "." + prefixName;
                 //check if prefix is defined in the config by name.
                 if(isPrefixDefined(prefixName)){
-                    //if it is defined, add the prefix, and it's weight, to the string arraylist.
-                    prefixes.add(prefix);
+                    //if it is defined, add the prefix, and it's weight, to the unsorted prefix map
+                    unsortedPrefixes.put(prefixName,Integer.valueOf(n.getKey().split("\\.")[2]));
                 }else{
                     // if it isn't, warn the console that the prefix name isn't define but there is a node for it!
                     logger.warning(ChatColor.RED + "Prefix " + prefixName + " is not defined in the config but you have a permission node for it!");
                 }
             }
         }
-        if(prefixes.isEmpty()){
+
+        if(unsortedPrefixes.isEmpty()){
             //if no prefixes have been added to the list, use the default prefix.
-            prefixes.add(defaultPrefixTarget);
+            unsortedPrefixes.put(defaultPrefixTarget,Integer.valueOf("0"));
         }
 
-        //sort prefixes with by their weight int.
-        prefixes.sort((a, b) -> {
-            String[] as = a.split("\\.");
-            String[] bs = b.split("\\.");
-            int result = Integer.valueOf(as[0]).compareTo(Integer.valueOf(bs[0]));
-            if (result == 0)
-                result = Integer.valueOf(as[0]).compareTo(Integer.valueOf(bs[0]));
-            return result;
-        });
-
-        //clip the weight off of the end of the prefix to get the prefix name.
-        ArrayList<String> clippedPrefixes = new ArrayList<>();
-        for (String prefix : prefixes) {
-            clippedPrefixes.add(prefix.split("\\.")[1]);
-        }
+        ArrayList<String> sortedPrefixes = valueSortReverseToArray(unsortedPrefixes);
 
         if(metaHelper.hasMetaValue(p,lastKnownPrefixes)){
             ArrayList<String> currentPrefixList = StringToArrayListString(
                     metaHelper.getMetaValue(p,lastKnownPrefixes));
-            if(clippedPrefixes.equals(currentPrefixList)){
-                //todo check if new list is different
-                // if it is, notify the player
-                // if it isn't, just ignore it and move on.
+            if(sortedPrefixes.equals(currentPrefixList)){
+                chatHelper.sendChat(p,"Your prefixes have changed!");
             }
         }
 
-        metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(
-                clippedPrefixes.stream().distinct().collect(Collectors.toCollection(ArrayList::new))));
+        metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(sortedPrefixes));
+    }
+
+    public static <K, V extends Comparable<V> > ArrayList<K> valueSortReverseToArray(final Map<K, V> map){
+        //sorts passed maps by value and converts them to an array of the key type.
+
+        //define comparator
+        Comparator<K> valueComparator = Comparator.comparing(map::get);
+        //define new map with a reversed version of the comparator
+        Map<K, V> sorted = new TreeMap<>(valueComparator.reversed());
+        //put data from provided map into the sorted map
+        sorted.putAll(map);
+
+        //loop through sorted map and place keys into ArrayList
+        ArrayList<K> outputArray = new ArrayList<>();
+        for (Map.Entry<K, V> mapElement : sorted.entrySet()) {
+            outputArray.add(mapElement.getKey());
+        }
+
+        return outputArray;
     }
 
     public static ArrayList<String> getPlayerPrefixes(Player p){
         return StringToArrayListString(metaHelper.getMetaValue(p,lastKnownPrefixes));
     }
+
 }
