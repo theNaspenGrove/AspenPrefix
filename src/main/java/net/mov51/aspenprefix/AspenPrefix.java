@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.luckperms.api.LuckPerms;
 import net.mov51.aspenprefix.commands.PrefixCommand;
 import net.mov51.aspenprefix.commands.PrefixTabComplete;
+import net.mov51.aspenprefix.listeners.playerLogIn;
 import net.mov51.periderm.luckperms.AspenLuckPermsHelper;
 import net.mov51.periderm.paper.chat.AspenChatHelper;
 import net.mov51.periderm.paper.chat.PredefinedMessage;
@@ -54,6 +55,7 @@ public final class AspenPrefix extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("prefix")).setExecutor(new PrefixCommand());
         Objects.requireNonNull(getCommand("prefix")).setTabCompleter(new PrefixTabComplete());
+        getServer().getPluginManager().registerEvents(new playerLogIn(), this);
         logger.info("You have been...");
         logger.info("PREFIXED!");
     }

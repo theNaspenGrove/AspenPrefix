@@ -49,7 +49,7 @@ public class PrefixTabComplete implements TabCompleter {
         if(permHelper.hasPermission(p, prefixSetCustomOwn,true) && hasCustomPrefix(p)){
             l.add("Custom");
         }
-        l.addAll(getAllPrefixes(p));
+        l.addAll(getPlayerPrefixes(p));
         return l;
     }
 

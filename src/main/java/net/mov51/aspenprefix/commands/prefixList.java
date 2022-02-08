@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.commands.prefixSetCustom.prefixSetCustomOwn;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.getAllPrefixes;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 
 public class prefixList {
@@ -51,7 +50,7 @@ public class prefixList {
                     chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom)", "/prefix setCustom")));
                 }
             }
-        for (String prefix :  getAllPrefixes(p)) {
+        for (String prefix :  getPlayerPrefixes(p)) {
             chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix select " + prefix) ));
         }
         chatHelper.sendBarMessage(p);

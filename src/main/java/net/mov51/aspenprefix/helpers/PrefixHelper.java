@@ -9,16 +9,23 @@ import net.mov51.periderm.luckperms.AspenMetaKey;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
+import static net.mov51.periderm.paper.helpers.formatting.StringToArrayListString;
+import static net.mov51.periderm.paper.helpers.formatting.arrayListStringToString;
 
 
 public class PrefixHelper {
 
     public static AspenMetaKey currentPrefix = new AspenMetaKey("CurrentPrefix");
     public static AspenMetaKey customPrefix = new AspenMetaKey("CustomPrefix");
+    public static AspenMetaKey lastKnownPrefixes = new AspenMetaKey("PrefixList");
 
     public static String getSelectedPrefix(Player p){
         return metaHelper.getMetaValue(p,currentPrefix);
@@ -52,7 +59,7 @@ public class PrefixHelper {
         if(!hasSelectedPrefix(p)){
             //if no prefix is selected,
             // get the value of the first prefix sorted by weight
-            return getPrefixValue(getAllPrefixes(p).get(0));
+            return getPrefixValue(getPlayerPrefixes(p).get(0));
         }else if(getSelectedPrefix(p).equals(customPrefix.getKey())){
             //if the selected prefix is equal to the customPrefixKey
             // then return the value of the custom prefix
@@ -62,8 +69,9 @@ public class PrefixHelper {
             return getPrefixValue(getSelectedPrefix(p));
     }
 
-    public static ArrayList<String> getAllPrefixes(Player p){
+    public static void loadPlayerPrefixList(Player p){
         //todo save this list to users on re-log/login.
+
         //get LP-user.
         User user = LPapi.getPlayerAdapter(Player.class).getUser(p);
         //define prefix arraylist.
@@ -92,8 +100,6 @@ public class PrefixHelper {
             //if no prefixes have been added to the list, use the default prefix.
             prefixes.add(defaultPrefixTarget);
         }
-        //todo remove debug log.
-        logger.warning("un-sorted prefixes" + ": " + prefixes);
 
         //sort prefixes with by their weight int.
         prefixes.sort((a, b) -> {
@@ -105,18 +111,27 @@ public class PrefixHelper {
             return result;
         });
 
-        //todo remove debug log.
-        logger.warning("sorted prefixes" + ": " + prefixes);
-
         //clip the weight off of the end of the prefix to get the prefix name.
         ArrayList<String> clippedPrefixes = new ArrayList<>();
         for (String prefix : prefixes) {
             clippedPrefixes.add(prefix.split("\\.")[1]);
         }
 
-        //todo remove debug log.
-        logger.warning("clipped prefixes" + ": " + clippedPrefixes);
+        if(metaHelper.hasMetaValue(p,lastKnownPrefixes)){
+            ArrayList<String> currentPrefixList = StringToArrayListString(
+                    metaHelper.getMetaValue(p,lastKnownPrefixes));
+            if(clippedPrefixes.equals(currentPrefixList)){
+                //todo check if new list is different
+                // if it is, notify the player
+                // if it isn't, just ignore it and move on.
+            }
+        }
 
-        return clippedPrefixes;
+        metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(
+                clippedPrefixes.stream().distinct().collect(Collectors.toCollection(ArrayList::new))));
+    }
+
+    public static ArrayList<String> getPlayerPrefixes(Player p){
+        return StringToArrayListString(metaHelper.getMetaValue(p,lastKnownPrefixes));
     }
 }
