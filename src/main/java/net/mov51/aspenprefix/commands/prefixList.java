@@ -45,13 +45,13 @@ public class prefixList {
         chatHelper.sendBarMessage(p);
             if(permHelper.hasPermission(p,prefixSetCustomOwn,true)){
                 if(hasCustomPrefix(p)){
-                    chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom) " + getCustomPrefix(p), "/prefix setCustom")));
+                    chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom) " + getCustomPrefix(p), "/prefix setCustom",false, null)));
                 }else{
-                    chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom)", "/prefix setCustom")));
+                    chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent("(Custom)", "/prefix setCustom",false, null)));
                 }
             }
         for (String prefix :  getPlayerPrefixes(p)) {
-            chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix select " + prefix) ));
+            chatHelper.sendChat(p,(chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix select " + prefix,false, null)));
         }
         chatHelper.sendBarMessage(p);
     }

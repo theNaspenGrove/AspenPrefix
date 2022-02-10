@@ -1,6 +1,7 @@
 package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.mov51.periderm.paper.chat.PredefinedMessage;
 import net.mov51.periderm.paper.permissions.Perm;
 import org.bukkit.command.Command;
@@ -30,8 +31,7 @@ public class PrefixCommand implements CommandExecutor {
                         chatHelper.sendChat(p,Component.text().content("You don't have a prefix selected!").build());
                         chatHelper.sendChat(p,
                                 Component.text()
-                                        .content("If you'd like to select one ")
-                                        .append(chatHelper.buildRunCommandComponent("Click Here!","/prefix list", true))
+                                        .append(chatHelper.buildRunCommandComponent("[Select One]","/prefix list", true))
                                         .build());
                     }else{
                         chatHelper.sendChat(p,Component.text()
@@ -42,7 +42,8 @@ public class PrefixCommand implements CommandExecutor {
                         chatHelper.sendChat(p,
                                 Component.text()
                                         .append(chatHelper.buildRunCommandComponent("[Select a New One]","/prefix list", true))
-                                        .append(chatHelper.buildRunCommandComponent("[Clear Selection]","/prefix select none", true))
+                                        .append(Component.text(" "))
+                                        .append(chatHelper.buildRunCommandComponent("[Clear Selection]","/prefix select none", true, NamedTextColor.RED))
                                         .build());
                     }
                 }
