@@ -34,6 +34,10 @@ public class PrefixHelper {
         metaHelper.setMetaValue(p,currentPrefix,Value);
     }
 
+    public static void clearSelectedPrefix(Player p){
+        metaHelper.clearMetaValue(p,currentPrefix);
+    }
+
     public static void setCustomPrefix(Player p, String Value){
         metaHelper.setMetaValue(p,customPrefix,Value);
     }

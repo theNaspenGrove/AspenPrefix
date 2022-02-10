@@ -38,7 +38,12 @@ public class prefixSelect {
                 } else if (args.length == 2) {
                     //the set subcommand and the desired prefix were passed
                     // check for permission and set the current senders prefix
-                    if(args[1].equalsIgnoreCase(defaultPrefixTarget)){
+                    if(args[1].equalsIgnoreCase("none")){
+                        clearSelectedPrefix(p);
+                        chatHelper.sendChat(p, Component.text()
+                                .content("You've deselected your prefix and will automatically use your highest prefix!")
+                                .build());
+                    }else if(args[1].equalsIgnoreCase(defaultPrefixTarget)){
                         setSelectedPrefix(p,customPrefix.getKey());
                         chatHelper.sendChat(p, Component.text()
                                 .content("You selected your Custom prefix that looks like this: ")

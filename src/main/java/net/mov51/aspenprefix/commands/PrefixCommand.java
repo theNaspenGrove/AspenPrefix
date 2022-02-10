@@ -41,8 +41,8 @@ public class PrefixCommand implements CommandExecutor {
                                 .build());
                         chatHelper.sendChat(p,
                                 Component.text()
-                                        .content("If you'd like to select a different prefix ")
-                                        .append(chatHelper.buildRunCommandComponent("Click Here!","/prefix list", true))
+                                        .append(chatHelper.buildRunCommandComponent("[Select a New One]","/prefix list", true))
+                                        .append(chatHelper.buildRunCommandComponent("[Clear Selection]","/prefix select none", true))
                                         .build());
                     }
                 }
