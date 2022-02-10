@@ -20,8 +20,6 @@ import static net.mov51.aspenprefix.helpers.ConfigHelper.pluginPrefix;
 
 public final class AspenPrefix extends JavaPlugin {
 
-    //Register the LuckPerms API variable
-    public static LuckPerms LPapi;
     //register plugin
     public static Logger logger;
     public static org.bukkit.plugin.Plugin plugin = null;
@@ -34,17 +32,16 @@ public final class AspenPrefix extends JavaPlugin {
         plugin=this;
         logger = AspenPrefix.plugin.getLogger();
         chatHelper = new AspenChatHelper(pluginPrefix);
-        metaHelper = new AspenLuckPermsHelper(logger,"AspenPrefix");
         permHelper = new PermissionHelper("AspenPrefix.",
                 new PredefinedMessage(Component.text("You don't have permission to run that command!")));
-
 
         plugin.saveDefaultConfig();
 
         //get the LuckPerms API
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
-            LPapi = provider.getProvider();
+            //Register the LuckPerms metaHelper variable
+            metaHelper = new AspenLuckPermsHelper(logger,"AspenPrefix");
             logger.info("LuckPerms dependency loaded!");
         }
 

@@ -66,11 +66,11 @@ public class PrefixHelper {
 
     public static void loadPlayerPrefixList(Player p){
         //get LP-user.
-        User user = LPapi.getPlayerAdapter(Player.class).getUser(p);
+        User user = metaHelper.getLPapi().getPlayerAdapter(Player.class).getUser(p);
         //define prefix TreeMap for unsorted prefixes to be added with their weight.
         TreeMap<String, Integer> unsortedPrefixes = new TreeMap<>();
         //Loop through nodes selected by query options.
-        for(Node n : user.resolveInheritedNodes(LPapi.getContextManager().getQueryOptions(p))){
+        for(Node n : user.resolveInheritedNodes(metaHelper.getLPapi().getContextManager().getQueryOptions(p))){
             if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
                 //get Prefix Name separate from weight.
                 String prefixName = n.getKey().split("\\.")[3];
