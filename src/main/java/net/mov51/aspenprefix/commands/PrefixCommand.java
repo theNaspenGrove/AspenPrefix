@@ -26,7 +26,7 @@ public class PrefixCommand implements CommandExecutor {
             Player p = (Player) sender;
             if(args.length == 0){
                 if(permHelper.hasPermission(p,prefixCommand)){
-                    if(!hasSelectedPrefix(p)){
+                    if(hasNoPrefix(p)){
                         chatHelper.sendChat(p,Component.text().content("You don't have a prefix selected!").build());
                         chatHelper.sendChat(p,
                                 Component.text()

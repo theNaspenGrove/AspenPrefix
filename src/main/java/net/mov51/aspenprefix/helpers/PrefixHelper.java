@@ -26,8 +26,8 @@ public class PrefixHelper {
         return metaHelper.getMetaValue(p,currentPrefix);
     }
 
-    public static boolean hasSelectedPrefix(Player p){
-        return getSelectedPrefix(p) != null;
+    public static boolean hasNoPrefix(Player p){
+        return getSelectedPrefix(p) == null;
     }
 
     public static void setSelectedPrefix(Player p, String Value){
@@ -51,7 +51,7 @@ public class PrefixHelper {
     }
 
     public static String getCurrentPrefix(Player p){
-        if(!hasSelectedPrefix(p)){
+        if(hasNoPrefix(p)){
             //if no prefix is selected,
             // get the value of the first prefix sorted by weight
             return getPrefixValue(getPlayerPrefixes(p).get(0));
