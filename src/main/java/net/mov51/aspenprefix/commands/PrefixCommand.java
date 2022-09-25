@@ -2,8 +2,8 @@ package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.mov51.periderm.paper.chat.PredefinedMessage;
-import net.mov51.periderm.paper.permissions.Perm;
+import net.mov51.periderm.chat.PredefinedMessage;
+import net.mov51.periderm.permissions.Perm;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

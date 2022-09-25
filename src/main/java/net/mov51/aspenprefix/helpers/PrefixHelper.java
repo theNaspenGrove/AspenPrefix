@@ -4,7 +4,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
-import net.mov51.periderm.luckperms.AspenMetaKey;
+import net.mov51.periderm.AspenMetaKey;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -12,8 +12,8 @@ import java.util.*;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
-import static net.mov51.periderm.paper.helpers.formatting.StringToArrayListString;
-import static net.mov51.periderm.paper.helpers.formatting.arrayListStringToString;
+import static net.mov51.periderm.helpers.formatting.StringToArrayListString;
+import static net.mov51.periderm.helpers.formatting.arrayListStringToString;
 
 
 public class PrefixHelper {
@@ -77,11 +77,11 @@ public class PrefixHelper {
         for(Node n : user.resolveInheritedNodes(metaHelper.getLPapi().getContextManager().getQueryOptions(p))){
             if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
                 //get Prefix Name separate from weight.
-                String prefixName = n.getKey().split("\\.")[3];
+                String prefixName = n.getKey().split("\\.")[2];
                 //check if prefix is defined in the config by name.
                 if(isPrefixDefined(prefixName)){
                     //if it is defined, add the prefix, and it's weight, to the unsorted prefix map
-                    unsortedPrefixes.put(prefixName,Integer.valueOf(n.getKey().split("\\.")[2]));
+                    unsortedPrefixes.put(prefixName,getPrefixWeight(prefixName));
                 }else{
                     // if it isn't, warn the console that the prefix name isn't define but there is a node for it!
                     logger.warning(ChatColor.RED + "Prefix " + prefixName + " is not defined in the config but you have a permission node for it!");
@@ -93,13 +93,13 @@ public class PrefixHelper {
             //if no prefixes have been added to the list, use the default prefix.
             unsortedPrefixes.put(defaultPrefixTarget,Integer.valueOf("0"));
         }
-
         ArrayList<String> sortedPrefixes = valueSortReverseToArray(unsortedPrefixes);
-
         if(metaHelper.hasMetaValue(p,lastKnownPrefixes)){
+            System.out.println("has");
             ArrayList<String> currentPrefixList = StringToArrayListString(
                     metaHelper.getMetaValue(p,lastKnownPrefixes));
-            if(sortedPrefixes.equals(currentPrefixList)){
+            if(!sortedPrefixes.equals(currentPrefixList)){
+                System.out.println("not equal");
                 chatHelper.sendChat(p,"Your prefixes have changed!");
             }
         }

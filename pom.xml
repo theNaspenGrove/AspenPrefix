@@ -6,7 +6,7 @@
 
     <groupId>net.mov51</groupId>
     <artifactId>AspenPrefix</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>AspenPrefix</name>
@@ -26,6 +26,22 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
         </plugins>
@@ -50,6 +66,10 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/theAspenGrove/Periderm/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -70,6 +90,11 @@
             <artifactId>placeholderapi</artifactId>
             <version>2.10.10</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.mov51</groupId>
+            <artifactId>periderm</artifactId>
+            <version>1.1-snapshot</version>
         </dependency>
     </dependencies>
 </project>

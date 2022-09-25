@@ -1,8 +1,8 @@
 package net.mov51.aspenprefix.commands;
 
 import net.kyori.adventure.text.Component;
-import net.mov51.periderm.paper.chat.PredefinedMessage;
-import net.mov51.periderm.paper.permissions.Perm;
+import net.mov51.periderm.chat.PredefinedMessage;
+import net.mov51.periderm.permissions.Perm;
 import org.bukkit.entity.Player;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
