@@ -48,7 +48,6 @@ public final class AspenPrefix extends JavaPlugin {
         if (provider != null) {
             //Register the LuckPerms metaHelper variable
             metaHelper = new AspenLuckPermsHelper(logger,"AspenPrefix");
-            logger.info("LuckPerms dependency loaded!");
         }
 
         //create PlaceHolder API expansion
