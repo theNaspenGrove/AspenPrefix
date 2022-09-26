@@ -13,9 +13,6 @@ public class prefixSetCustom {
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix!"));
     public static final Perm prefixSetCustomOwn = new Perm("prefixSetCustom", denyMessageOwn,"setCustom");
 
-//    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix for others!"));
-//    private static final Perm prefixSetCustomOther = new Perm("prefixSetCustomOther", denyMessageOther);
-
     public static boolean command(Player p, String[] args){
         if(args.length <= 3){
             //args should be a maximum of 2

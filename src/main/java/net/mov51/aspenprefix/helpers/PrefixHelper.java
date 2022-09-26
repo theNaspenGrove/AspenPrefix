@@ -18,9 +18,9 @@ import static net.mov51.periderm.helpers.formatting.arrayListStringToString;
 
 public class PrefixHelper {
 
-    public static AspenMetaKey currentPrefix = new AspenMetaKey("CurrentPrefix");
-    public static AspenMetaKey customPrefix = new AspenMetaKey("CustomPrefix");
-    public static AspenMetaKey lastKnownPrefixes = new AspenMetaKey("PrefixList");
+    public static final AspenMetaKey currentPrefix = new AspenMetaKey("CurrentPrefix");
+    public static final AspenMetaKey customPrefix = new AspenMetaKey("CustomPrefix");
+    public static final AspenMetaKey lastKnownPrefixes = new AspenMetaKey("PrefixList");
 
     public static String getSelectedPrefix(Player p){
         return metaHelper.getMetaValue(p,currentPrefix);

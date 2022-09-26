@@ -16,10 +16,6 @@ public class prefixList {
             "You don't have permission to list your prefixes!!"));
     public static final Perm prefixListOwn = new Perm("prefixList", denyMessageOwn, "list");
 
-//    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text(
-//            "You don't have permission to list the prefixes of another player!"));
-//    private static final Perm prefixListOther = new Perm("prefixListOther", denyMessageOther);
-
     public static boolean command(Player p, String[] args){
         if(permHelper.hasPermission(p,prefixListOwn)){
             if(args.length == 1){

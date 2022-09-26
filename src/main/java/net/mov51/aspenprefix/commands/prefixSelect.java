@@ -16,10 +16,6 @@ public class prefixSelect {
     public static final Perm prefixSelectOwn = new Perm("prefixSelect", denyMessageOwn, "select");
     public static final String customPrefixTarget = "custom-prefix";
 
-//    private static final PredefinedMessage denyMessageOther =new PredefinedMessage(Component.text(
-//            "You don't have permission to select a prefix for others!"));
-//    private static final Perm prefixSelectOthers = new Perm("prefixSelectOthers", denyMessageOther);
-
     private static final PredefinedMessage useTheListCommand =new PredefinedMessage(Component.text()
             .content("Please use the ")
             .append(chatHelper.buildRunCommandComponent("list", "/prefix list", true))

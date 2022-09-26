@@ -2,7 +2,7 @@ name: AspenPrefix
 version: ${project.version}
 main: net.mov51.aspenprefix.AspenPrefix
 api-version: 1.17
-prefix: ApenPrefix
+prefix: AspenPrefix
 depend: [LuckPerms,Periderm]
 authors: [mov51]
 website: mov51.net
@@ -20,7 +20,7 @@ permissions:
     description: Ability to list the prefixes you have access to. Requires the 'AspenPrefix.prefixCommand' permission
     default: true
   AspenPrefix.prefixSelect:
-    description: Ability to select the prefix you want to use out of a list of the prefixes you have accses to. Requires the 'AspenPrefix.prefixCommand' permission
+    description: Ability to select the prefix you want to use out of a list of the prefixes you have access to. Requires the 'AspenPrefix.prefixCommand' permission
     default: true
   AspenPrefix.prefixSetCustom:
     description: Ability to set your own custom prefix. Requires the 'AspenPrefix.prefixCommand' permission
