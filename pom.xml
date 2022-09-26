@@ -6,7 +6,7 @@
 
     <groupId>net.mov51</groupId>
     <artifactId>AspenPrefix</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>AspenPrefix</name>
