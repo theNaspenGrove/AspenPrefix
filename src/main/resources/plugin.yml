@@ -3,7 +3,7 @@ version: ${project.version}
 main: net.mov51.aspenprefix.AspenPrefix
 api-version: 1.17
 prefix: ApenPrefix
-depend: [LuckPerms]
+depend: [LuckPerms,Periderm]
 authors: [mov51]
 website: mov51.net
 commands:
