@@ -6,7 +6,7 @@
 
     <groupId>net.mov51</groupId>
     <artifactId>AspenPrefix</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>AspenPrefix</name>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>net.mov51</groupId>
             <artifactId>periderm</artifactId>
-            <version>1.1-snapshot</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>
