@@ -23,7 +23,11 @@ public class PrefixHelper {
     public static final AspenMetaKey lastKnownPrefixes = new AspenMetaKey("PrefixList");
 
     public static String getSelectedPrefix(Player p){
-        return metaHelper.getMetaValue(p,currentPrefix);
+        return metaHelper.getMetaValue(p,currentPrefix) != null ? metaHelper.getMetaValue(p,currentPrefix) : getLowestPriorityPrefixTarget(p);
+    }
+
+    private static String getLowestPriorityPrefixTarget(Player p){
+        return metaHelper.getMetaValue(p,lastKnownPrefixes) != null ? StringToArrayListString(metaHelper.getMetaValue(p,lastKnownPrefixes)).get(0) : defaultPrefixTarget;
     }
 
     public static boolean hasNoPrefix(Player p){
@@ -55,17 +59,11 @@ public class PrefixHelper {
     }
 
     public static String getCurrentPrefix(Player p){
-        if(hasNoPrefix(p)){
-            //if no prefix is selected,
-            // get the value of the first prefix sorted by weight
-            return getPrefixValue(getPlayerPrefixes(p).get(0));
-        }else if(getSelectedPrefix(p).equals(customPrefix.getKey())){
-            //if the selected prefix is equal to the customPrefixKey
-            // then return the value of the custom prefix
+        if(hasCustomPrefix(p)){
             return getCustomPrefix(p);
-        }else
-            //return the value of the selected prefix
-            return getPrefixValue(getSelectedPrefix(p));
+        } else {
+            return getSelectedPrefix(p);
+        }
     }
 
     public static void loadPlayerPrefixList(Player p){

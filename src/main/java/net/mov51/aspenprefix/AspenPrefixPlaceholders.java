@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.prefixFormat;
 import static net.mov51.aspenprefix.helpers.PrefixHelper.getCurrentPrefix;
 
@@ -42,7 +43,7 @@ public class AspenPrefixPlaceholders extends PlaceholderExpansion {
     public String onRequest(OfflinePlayer p, String params) {
 
         if(params.equalsIgnoreCase("ActiveAspenPrefix")){
-            return prefixFormat.replaceFirst("\\$prefix",getCurrentPrefix((Player) p));
+            return prefixFormat.replaceFirst("\\$prefix",getPrefixValue(getCurrentPrefix((Player) p)));
         }
 
         return null; // Placeholder is unknown by the Expansion
