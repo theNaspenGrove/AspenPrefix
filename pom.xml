@@ -6,7 +6,7 @@
 
     <groupId>net.mov51</groupId>
     <artifactId>AspenPrefix</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <name>AspenPrefix</name>
@@ -52,7 +52,7 @@
         </repository>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/theAspenGrove/Periderm/</url>
+            <url>https://maven.pkg.github.com/theNaspenGrove/Periderm/</url>
         </repository>
     </repositories>
 
@@ -76,9 +76,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.mov51</groupId>
+            <groupId>mov.naspen</groupId>
             <artifactId>periderm</artifactId>
-            <version>1.0</version>
+            <version>2.1</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,19 +1,19 @@
 package net.mov51.aspenprefix.helpers;
 
+import mov.naspen.periderm.helpers.luckPerms.AspenMetaKey;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
-import net.mov51.periderm.AspenMetaKey;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.*;
 
+import static mov.naspen.periderm.helpers.StringsHelper.StringToArrayListString;
+import static mov.naspen.periderm.helpers.StringsHelper.arrayListStringToString;
 import static net.mov51.aspenprefix.AspenPrefix.*;
 import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
-import static net.mov51.periderm.helpers.formatting.StringToArrayListString;
-import static net.mov51.periderm.helpers.formatting.arrayListStringToString;
 
 
 public class PrefixHelper {
@@ -74,7 +74,7 @@ public class PrefixHelper {
         //Loop through nodes selected by query options.
         for(Node n : user.resolveInheritedNodes(metaHelper.getLPapi().getContextManager().getQueryOptions(p))){
             if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
-                //get Prefix Name separate from weight.
+                //get Prefix Name.
                 String prefixName = n.getKey().split("\\.")[2];
                 //check if prefix is defined in the config by name.
                 if(isPrefixDefined(prefixName)){
@@ -89,20 +89,22 @@ public class PrefixHelper {
 
         if(unsortedPrefixes.isEmpty()){
             //if no prefixes have been added to the list, use the default prefix.
-            unsortedPrefixes.put(defaultPrefixTarget,Integer.valueOf("0"));
+            unsortedPrefixes.put(defaultPrefixTarget,0);
         }
         ArrayList<String> sortedPrefixes = valueSortReverseToArray(unsortedPrefixes);
         if(metaHelper.hasMetaValue(p,lastKnownPrefixes)){
-            System.out.println("has");
             ArrayList<String> currentPrefixList = StringToArrayListString(
                     metaHelper.getMetaValue(p,lastKnownPrefixes));
             if(!sortedPrefixes.equals(currentPrefixList)){
-                System.out.println("not equal");
                 chatHelper.sendChat(p,"Your prefixes have changed!");
             }
         }
+        if(sortedPrefixes.size() > 1){
+            metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(sortedPrefixes));
+        }else{
+            metaHelper.setMetaValue(p,lastKnownPrefixes,sortedPrefixes.get(0));
+        }
 
-        metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(sortedPrefixes));
     }
 
     public static <K, V extends Comparable<V> > ArrayList<K> valueSortReverseToArray(final Map<K, V> map){

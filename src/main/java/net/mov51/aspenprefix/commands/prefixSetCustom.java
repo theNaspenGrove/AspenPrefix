@@ -1,8 +1,8 @@
 package net.mov51.aspenprefix.commands;
 
+import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
-import net.mov51.periderm.chat.PredefinedMessage;
-import net.mov51.periderm.permissions.Perm;
+import mov.naspen.periderm.chat.PredefinedMessage;
 import org.bukkit.entity.Player;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
@@ -11,7 +11,7 @@ import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 public class prefixSetCustom {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix!"));
-    public static final Perm prefixSetCustomOwn = new Perm("prefixSetCustom", denyMessageOwn,"setCustom");
+    public static final PermItem prefixSetCustomOwn = new PermItem("prefixSetCustom", denyMessageOwn,"setCustom");
 
     public static boolean command(Player p, String[] args){
         if(args.length <= 3){

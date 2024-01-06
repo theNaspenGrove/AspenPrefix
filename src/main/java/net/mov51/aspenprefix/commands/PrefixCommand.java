@@ -1,9 +1,9 @@
 package net.mov51.aspenprefix.commands;
 
+import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.mov51.periderm.chat.PredefinedMessage;
-import net.mov51.periderm.permissions.Perm;
+import mov.naspen.periderm.chat.PredefinedMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 public class PrefixCommand implements CommandExecutor {
 
     private final PredefinedMessage denyMessage = new PredefinedMessage(Component.text("You don't have permission to run that command!"));
-    private final Perm prefixCommand = new Perm(
+    private final PermItem prefixCommand = new PermItem(
             "prefixCommand",
             denyMessage,"/prefix");
 

@@ -1,8 +1,8 @@
 package net.mov51.aspenprefix.commands;
 
+import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
-import net.mov51.periderm.chat.PredefinedMessage;
-import net.mov51.periderm.permissions.Perm;
+import mov.naspen.periderm.chat.PredefinedMessage;
 import org.bukkit.entity.Player;
 
 import static net.mov51.aspenprefix.AspenPrefix.*;
@@ -13,7 +13,7 @@ public class prefixSelect {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text(
             "You don't have permission to select a prefix!"));
-    public static final Perm prefixSelectOwn = new Perm("prefixSelect", denyMessageOwn, "select");
+    public static final PermItem prefixSelectOwn = new PermItem("prefixSelect", denyMessageOwn, "select");
     public static final String customPrefixTarget = "custom-prefix";
 
     private static final PredefinedMessage useTheListCommand =new PredefinedMessage(Component.text()
