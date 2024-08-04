@@ -3,6 +3,7 @@ package mov.naspen.naspenprefix.commands;
 import mov.naspen.naspenprefix.NaspenPrefix;
 import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import mov.naspen.periderm.chat.PredefinedMessage;
 import org.bukkit.command.Command;
@@ -27,16 +28,17 @@ public class PrefixCommand implements CommandExecutor {
             Player p = (Player) sender;
             if(args.length == 0){
                 if(NaspenPrefix.permHelper.hasPermission(p,prefixCommand)){
-                    if(hasNoPrefix(p)){
+                    if(NaspenPrefix.metaHelper.getMetaValue(p,currentPrefix) == null){
                         NaspenPrefix.chatHelper.sendChat(p,Component.text().content("You don't have a prefix selected!").build());
                         NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
                                         .append(NaspenPrefix.chatHelper.buildRunCommandComponent("[Select One]","/prefix list", true))
                                         .build());
                     }else{
+                        TextComponent selected = getActivePrefixAsComponent(p);
                         NaspenPrefix.chatHelper.sendChat(p,Component.text()
                                 .content("your prefix is: ")
-                                .append(getPrefixAsComponent(getCurrentPrefix(p)))
+                                .append(selected)
                                         .append(Component.text("!"))
                                 .build());
                         NaspenPrefix.chatHelper.sendChat(p,

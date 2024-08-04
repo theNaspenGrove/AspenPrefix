@@ -39,24 +39,24 @@ public class prefixSelect {
                         NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                 .content("You've deselected your prefix and will automatically use your highest prefix!")
                                 .build());
-                    }else if(args[1].equalsIgnoreCase(defaultPrefixTarget)){
+                    }else if(args[1].equalsIgnoreCase(customPrefixTarget)){
                         setSelectedPrefix(p,customPrefix.getKey());
                         NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                 .content("You selected your Custom prefix that looks like this: ")
-                                .append(getPrefixAsComponent(getCustomPrefix(p)))
+                                .append(getCustomPrefix(p))
                                 .build());
-                    }else if(args[1].equalsIgnoreCase(customPrefixTarget)){
-                        setSelectedPrefix(p,defaultPlayerPrefix);
+                    }else if(args[1].equalsIgnoreCase(defaultPrefixTarget)){
+                        setSelectedPrefix(p,defaultPrefixTarget);
                         NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                 .content("You selected the Default prefix because you don't have access to any other prefixes. It looks like this: ")
-                                .append(getPrefixAsComponent(defaultPlayerPrefix))
+                                .append(defaultPlayerPrefix)
                                 .build());
                     } else{
-                        if (isPrefixDefined(args[1])) {
-                            setSelectedPrefix(p, args[1]);
+                        if (isSelectedPrefixDefined(args[1])) {
+                            Component selected = setSelectedPrefix(p, args[1]);
                             NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                     .content("You selected your '")
-                                    .append(getPrefixAsComponent(getPrefixValue(args[1])))
+                                    .append(selected)
                                     .append(Component.text("' prefix!"))
                                     .build());
                         } else {

@@ -25,7 +25,7 @@ public class prefixSetCustom {
                     if(PrefixHelper.hasCustomPrefix(p)){
                         NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                 .content("Your custom prefix is: ")
-                                .append(PrefixHelper.getPrefixAsComponent(PrefixHelper.getCustomPrefix(p)))
+                                .append(PrefixHelper.getCustomPrefix(p))
                                 .build());
                         NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
@@ -56,7 +56,7 @@ public class prefixSetCustom {
                         if(args.length == 3){
                             PrefixHelper.setCustomPrefix(p,args[2]);
                             PrefixHelper.setSelectedPrefix(p, PrefixHelper.customPrefix.getKey());
-                            NaspenPrefix.chatHelper.sendChat(p,"Your prefix has been set to: " + PrefixHelper.getCustomPrefix(p));
+                            NaspenPrefix.chatHelper.sendChat(p,Component.text().content("Your prefix has been set to: ").append(PrefixHelper.getCustomPrefix(p)).build());
                         }else{
                             NaspenPrefix.chatHelper.sendChat(p,"Please specify a new Custom Prefix!");
                         }
@@ -64,7 +64,7 @@ public class prefixSetCustom {
                     case "select":
                         //selecting the current custom prefix
                         PrefixHelper.setSelectedPrefix(p, PrefixHelper.customPrefix.getKey());
-                        NaspenPrefix.chatHelper.sendChat(p,"You've selected your custom prefix: " + PrefixHelper.getCustomPrefix(p));
+                        NaspenPrefix.chatHelper.sendChat(p,Component.text().content("You've selected your custom prefix: ").append(PrefixHelper.getCustomPrefix(p)).build());
                         return true;
                     default:
                         //todo command help

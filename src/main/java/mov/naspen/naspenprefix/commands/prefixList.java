@@ -5,9 +5,10 @@ import mov.naspen.naspenprefix.helpers.PrefixHelper;
 import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
 import mov.naspen.periderm.chat.PredefinedMessage;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.entity.Player;
 
-import static mov.naspen.naspenprefix.helpers.ConfigHelper.getPrefixValue;
+import static mov.naspen.naspenprefix.helpers.ConfigHelper.getPrefixFromTarget;
 
 public class prefixList {
 
@@ -40,13 +41,13 @@ public class prefixList {
         NaspenPrefix.chatHelper.sendBarMessage(p);
             if(NaspenPrefix.permHelper.hasPermission(p, prefixSetCustom.prefixSetCustomOwn,true)){
                 if(PrefixHelper.hasCustomPrefix(p)){
-                    NaspenPrefix.chatHelper.sendChat(p,(NaspenPrefix.chatHelper.buildRunCommandComponent("(Custom) " + PrefixHelper.getCustomPrefix(p), "/prefix setCustom",false, null)));
+                    NaspenPrefix.chatHelper.sendChat(p,(NaspenPrefix.chatHelper.buildRunCommandComponent(Component.text().content("(Custom)").append(PrefixHelper.getCustomPrefix(p)).build(), "/prefix setCustom",false, null)));
                 }else{
                     NaspenPrefix.chatHelper.sendChat(p,(NaspenPrefix.chatHelper.buildRunCommandComponent("(Custom)", "/prefix setCustom",false, null)));
                 }
             }
         for (String prefix :  PrefixHelper.getPlayerPrefixes(p)) {
-            NaspenPrefix.chatHelper.sendChat(p,(NaspenPrefix.chatHelper.buildRunCommandComponent(getPrefixValue(prefix),"/prefix select " + prefix,false, null)));
+            NaspenPrefix.chatHelper.sendChat(p,(NaspenPrefix.chatHelper.buildRunCommandComponent(getPrefixFromTarget(prefix),"/prefix select " + prefix,false, null)));
         }
         NaspenPrefix.chatHelper.sendBarMessage(p);
     }

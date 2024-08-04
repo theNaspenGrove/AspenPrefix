@@ -6,7 +6,7 @@
 
     <groupId>mov.naspen</groupId>
     <artifactId>NaspenPrefix</artifactId>
-    <version>1.4</version>
+    <version>2.0-snapshot-1</version>
     <packaging>jar</packaging>
 
     <name>NaspenPrefix</name>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>mov.naspen</groupId>
             <artifactId>periderm</artifactId>
-            <version>2.2</version>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
 </project>

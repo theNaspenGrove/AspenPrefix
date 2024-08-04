@@ -14,14 +14,32 @@ commands:
 
 permissions:
   naspenprefix.command.prefix:
-    description: Ability to run the Prefix command. Required for all sub-commands
+    description: Ability to run the Prefix command. Required for all sub-commands.
     default: false
   naspenprefix.command.prefix.list:
-    description: Ability to list the prefixes you have access to. Requires the 'NaspenPrefix.prefixCommand' permission
+    description: Ability to run the "list" sub-command.
     default: true
-  naspenprefix.command.prefix.select:
-    description: Ability to select the prefix you want to use out of a list of the prefixes you have access to. Requires the 'AspenPrefix.prefixCommand' permission
+  naspenprefix.command.prefix.list.own:
+    description: Ability to list the prefixes you have access to.
     default: true
+  naspenprefix.command.prefix.list.other:
+    description: Ability to list the prefixes another player has access to.
+    default: false
+  naspenprefix.command.prefix.set:
+    description: Ability to run the "set" sub-command.
+    default: true
+  naspenprefix.command.prefix.set.own:
+    description: Ability to select the prefix you want to use out of a list of the prefixes you have access to.
+    default: true
+  naspenprefix.command.prefix.set.other:
+    description: Ability to select the prefix another player has access to.
+    default: false
+  naspenprefix.command.prefix.set.custom:
+    description: Ability to run the "setCustom" sub-command.
+    default: false
   naspenprefix.command.prefix.set.custom.own:
-    description: Ability to set your own custom prefix. Requires the 'NaspenPrefix.prefixCommand' permission
+    description: Ability to set your own custom prefix.
+    default: false
+  naspenprefix.command.prefix.set.custom.other:
+    description: Ability to set a custom prefix for another player.
     default: false

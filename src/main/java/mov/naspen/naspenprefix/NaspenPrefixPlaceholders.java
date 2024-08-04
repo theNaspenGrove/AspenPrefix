@@ -1,13 +1,13 @@
 package mov.naspen.naspenprefix;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static mov.naspen.naspenprefix.helpers.ConfigHelper.getPrefixValue;
 import static mov.naspen.naspenprefix.helpers.ConfigHelper.prefixFormat;
-import static mov.naspen.naspenprefix.helpers.PrefixHelper.getCurrentPrefix;
+import static mov.naspen.naspenprefix.helpers.PrefixHelper.getActivePrefixAsComponent;
 
 public class NaspenPrefixPlaceholders extends PlaceholderExpansion {
 
@@ -41,7 +41,7 @@ public class NaspenPrefixPlaceholders extends PlaceholderExpansion {
     public String onRequest(OfflinePlayer p, String params) {
 
         if(params.equalsIgnoreCase("ActivePrefix")){
-            return prefixFormat.replaceFirst("\\$prefix",getPrefixValue(getCurrentPrefix((Player) p)));
+            return prefixFormat.replaceFirst("\\$prefix", LegacyComponentSerializer.legacyAmpersand().serialize(getActivePrefixAsComponent((Player) p)));
         }
 
         return null; // Placeholder is unknown by the Expansion
