@@ -1,21 +1,19 @@
-package net.mov51.aspenprefix.helpers;
+package mov.naspen.naspenprefix.helpers;
 
-import net.mov51.aspenprefix.AspenPrefix;
+import mov.naspen.naspenprefix.NaspenPrefix;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Set;
 import java.util.TreeMap;
 
-import static net.mov51.aspenprefix.AspenPrefix.logger;
-
 public class ConfigHelper {
 
-    public static final FileConfiguration c = AspenPrefix.plugin.getConfig();
+    public static final FileConfiguration c = NaspenPrefix.plugin.getConfig();
     public static final TreeMap<String, Prefix> prefixes = new TreeMap<>();
 
     public static final String PrefixConfigSection = "Prefixes";
     public static final String pluginPrefix = c.getString("chat-prefix") != null ?
-            c.getString("chat-prefix") : "Aspen-Prefix";
+            c.getString("chat-prefix") : "Naspen-Prefix";
     public static final String prefixFormat = c.getString("prefix-format") != null ?
             c.getString("prefix-format") : "&6[&r{#812409}$prefix&6]&r";
     public static final String defaultPlayerPrefix = c.getString("default-prefix");
@@ -30,7 +28,7 @@ public class ConfigHelper {
             Prefix p = new Prefix(prefix, weight);
             prefixes.put(key, p);
         }
-        logger.info("Loaded " + prefixes.size() + " prefixes");
+        NaspenPrefix.logger.info("Loaded " + prefixes.size() + " prefixes");
     }
 
     public static boolean isPrefixDefined(String prefix){
@@ -47,7 +45,7 @@ public class ConfigHelper {
         }else if(requestedPrefixName.equals(defaultPrefixTarget)){
             return defaultPlayerPrefix;
         }
-        logger.warning("Requested prefix " + requestedPrefixName + " didn't exist!");
+        NaspenPrefix.logger.warning("Requested prefix " + requestedPrefixName + " didn't exist!");
         return defaultPlayerPrefix;
     }
 }

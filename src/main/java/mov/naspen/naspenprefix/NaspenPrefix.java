@@ -1,10 +1,10 @@
-package net.mov51.aspenprefix;
+package mov.naspen.naspenprefix;
 
 import net.kyori.adventure.text.Component;
 import net.luckperms.api.LuckPerms;
-import net.mov51.aspenprefix.commands.PrefixCommand;
-import net.mov51.aspenprefix.commands.PrefixTabComplete;
-import net.mov51.aspenprefix.listeners.playerLogIn;
+import mov.naspen.naspenprefix.commands.PrefixCommand;
+import mov.naspen.naspenprefix.commands.PrefixTabComplete;
+import mov.naspen.naspenprefix.listeners.playerLogIn;
 import mov.naspen.periderm.helpers.luckPerms.AspenLuckPermsHelper;
 import mov.naspen.periderm.chat.AspenChatHelper;
 import mov.naspen.periderm.chat.PredefinedMessage;
@@ -16,10 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import static net.mov51.aspenprefix.helpers.ConfigHelper.loadPrefixes;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.pluginPrefix;
+import static mov.naspen.naspenprefix.helpers.ConfigHelper.loadPrefixes;
+import static mov.naspen.naspenprefix.helpers.ConfigHelper.pluginPrefix;
 
-public final class AspenPrefix extends JavaPlugin {
+public final class NaspenPrefix extends JavaPlugin {
 
     //register plugin
     public static Logger logger;
@@ -32,11 +32,11 @@ public final class AspenPrefix extends JavaPlugin {
     public void onEnable() {
         plugin=this;
         //get logger
-        logger = AspenPrefix.plugin.getLogger();
+        logger = NaspenPrefix.plugin.getLogger();
         //create periderm chat helper
         chatHelper = new AspenChatHelper(pluginPrefix);
         //create periderm perms helper
-        permHelper = new PermissionHelper("AspenPrefix.",
+        permHelper = new PermissionHelper("NaspenPrefix.",
                 new PredefinedMessage(Component.text("You don't have permission to run that command!")),chatHelper);
 
         //create default config file
@@ -47,12 +47,12 @@ public final class AspenPrefix extends JavaPlugin {
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
             //Register the LuckPerms metaHelper variable
-            metaHelper = new AspenLuckPermsHelper(logger,"AspenPrefix");
+            metaHelper = new AspenLuckPermsHelper(logger,"NaspenPrefix");
         }
 
         //create PlaceHolder API expansion
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new AspenPrefixPlaceholders(this).register();
+            new NaspenPrefixPlaceholders(this).register();
             logger.info("Placeholders holding!");
         }
 

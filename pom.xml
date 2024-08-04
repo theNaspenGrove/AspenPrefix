@@ -4,18 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.mov51</groupId>
-    <artifactId>AspenPrefix</artifactId>
-    <version>1.3</version>
+    <groupId>mov.naspen</groupId>
+    <artifactId>NaspenPrefix</artifactId>
+    <version>1.4</version>
     <packaging>jar</packaging>
 
-    <name>AspenPrefix</name>
+    <name>NaspenPrefix</name>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>mov51.net</url>
+    <url>https://naspen.mov</url>
 
     <build>
         <plugins>

@@ -1,12 +1,11 @@
-package net.mov51.aspenprefix.commands;
+package mov.naspen.naspenprefix.commands;
 
+import mov.naspen.naspenprefix.NaspenPrefix;
+import mov.naspen.naspenprefix.helpers.PrefixHelper;
 import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
 import mov.naspen.periderm.chat.PredefinedMessage;
 import org.bukkit.entity.Player;
-
-import static net.mov51.aspenprefix.AspenPrefix.*;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
 
 public class prefixSetCustom {
 
@@ -22,31 +21,31 @@ public class prefixSetCustom {
                 //the setCustom subcommand was passed
                 // check for permission and send setCustom message
 
-                if(permHelper.hasPermission(p,prefixSetCustomOwn)){
-                    if(hasCustomPrefix(p)){
-                        chatHelper.sendChat(p, Component.text()
+                if(NaspenPrefix.permHelper.hasPermission(p,prefixSetCustomOwn)){
+                    if(PrefixHelper.hasCustomPrefix(p)){
+                        NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                 .content("Your custom prefix is: ")
-                                .append(getPrefixAsComponent(getCustomPrefix(p)))
+                                .append(PrefixHelper.getPrefixAsComponent(PrefixHelper.getCustomPrefix(p)))
                                 .build());
-                        chatHelper.sendChat(p,
+                        NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to use that one, ")
-                                        .append(chatHelper.buildRunCommandComponent("Click Here!","/prefix setCustom select", true))
+                                        .append(NaspenPrefix.chatHelper.buildRunCommandComponent("Click Here!","/prefix setCustom select", true))
                                         .build());
-                        chatHelper.sendChat(p,
+                        NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to make a new one, ")
-                                        .append(chatHelper.buildSuggestCommandComponent("Click Here","/prefix setCustom new ", true))
+                                        .append(NaspenPrefix.chatHelper.buildSuggestCommandComponent("Click Here","/prefix setCustom new ", true))
                                         .append(Component.text(" and add the prefix you want to the end of the command!"))
                                         .build());
                     }else{
-                        chatHelper.sendChat(p, Component.text()
+                        NaspenPrefix.chatHelper.sendChat(p, Component.text()
                                 .content("You don't have a Custom Prefix defined!")
                                 .build());
-                        chatHelper.sendChat(p,
+                        NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
                                         .content("If you'd like to make one, ")
-                                        .append(chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
+                                        .append(NaspenPrefix.chatHelper.buildSuggestCommandComponent("Click Here!","/prefix setCustom new", true))
                                         .build());
                     }
                 }
@@ -55,17 +54,17 @@ public class prefixSetCustom {
                     case "new":
                         //creating a new prefix and overriding the old one
                         if(args.length == 3){
-                            setCustomPrefix(p,args[2]);
-                            setSelectedPrefix(p,customPrefix.getKey());
-                            chatHelper.sendChat(p,"Your prefix has been set to: " + getCustomPrefix(p));
+                            PrefixHelper.setCustomPrefix(p,args[2]);
+                            PrefixHelper.setSelectedPrefix(p, PrefixHelper.customPrefix.getKey());
+                            NaspenPrefix.chatHelper.sendChat(p,"Your prefix has been set to: " + PrefixHelper.getCustomPrefix(p));
                         }else{
-                            chatHelper.sendChat(p,"Please specify a new Custom Prefix!");
+                            NaspenPrefix.chatHelper.sendChat(p,"Please specify a new Custom Prefix!");
                         }
                         return true;
                     case "select":
                         //selecting the current custom prefix
-                        setSelectedPrefix(p,customPrefix.getKey());
-                        chatHelper.sendChat(p,"You've selected your custom prefix: " + getCustomPrefix(p));
+                        PrefixHelper.setSelectedPrefix(p, PrefixHelper.customPrefix.getKey());
+                        NaspenPrefix.chatHelper.sendChat(p,"You've selected your custom prefix: " + PrefixHelper.getCustomPrefix(p));
                         return true;
                     default:
                         //todo command help

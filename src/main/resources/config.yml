@@ -1,5 +1,5 @@
 #prefix used by the plugin when sending chat messages.
-chat-prefix: "Aspen-Prefix"
+chat-prefix: "Naspen-Prefix"
 
 #prefix used if the player has no prefix permissions.
 default-prefix: '&6[&r{#812409}Spectator&6]&r'

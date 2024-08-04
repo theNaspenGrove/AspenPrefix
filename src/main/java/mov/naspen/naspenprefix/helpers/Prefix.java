@@ -1,4 +1,4 @@
-package net.mov51.aspenprefix.helpers;
+package mov.naspen.naspenprefix.helpers;
 
 public class Prefix {
     private final String prefix;

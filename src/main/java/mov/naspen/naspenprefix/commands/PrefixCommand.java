@@ -1,5 +1,6 @@
-package net.mov51.aspenprefix.commands;
+package mov.naspen.naspenprefix.commands;
 
+import mov.naspen.naspenprefix.NaspenPrefix;
 import mov.naspen.periderm.helpers.permissions.PermItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -11,8 +12,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 
-import static net.mov51.aspenprefix.AspenPrefix.*;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
+import static mov.naspen.naspenprefix.helpers.PrefixHelper.*;
 
 public class PrefixCommand implements CommandExecutor {
 
@@ -26,24 +26,24 @@ public class PrefixCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if(args.length == 0){
-                if(permHelper.hasPermission(p,prefixCommand)){
+                if(NaspenPrefix.permHelper.hasPermission(p,prefixCommand)){
                     if(hasNoPrefix(p)){
-                        chatHelper.sendChat(p,Component.text().content("You don't have a prefix selected!").build());
-                        chatHelper.sendChat(p,
+                        NaspenPrefix.chatHelper.sendChat(p,Component.text().content("You don't have a prefix selected!").build());
+                        NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
-                                        .append(chatHelper.buildRunCommandComponent("[Select One]","/prefix list", true))
+                                        .append(NaspenPrefix.chatHelper.buildRunCommandComponent("[Select One]","/prefix list", true))
                                         .build());
                     }else{
-                        chatHelper.sendChat(p,Component.text()
+                        NaspenPrefix.chatHelper.sendChat(p,Component.text()
                                 .content("your prefix is: ")
                                 .append(getPrefixAsComponent(getCurrentPrefix(p)))
                                         .append(Component.text("!"))
                                 .build());
-                        chatHelper.sendChat(p,
+                        NaspenPrefix.chatHelper.sendChat(p,
                                 Component.text()
-                                        .append(chatHelper.buildRunCommandComponent("[Select a New One]","/prefix list", true))
+                                        .append(NaspenPrefix.chatHelper.buildRunCommandComponent("[Select a New One]","/prefix list", true))
                                         .append(Component.text(" "))
-                                        .append(chatHelper.buildRunCommandComponent("[Clear Selection]","/prefix select none", true, NamedTextColor.RED))
+                                        .append(NaspenPrefix.chatHelper.buildRunCommandComponent("[Clear Selection]","/prefix select none", true, NamedTextColor.RED))
                                         .build());
                     }
                 }

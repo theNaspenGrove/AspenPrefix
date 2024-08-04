@@ -1,5 +1,6 @@
-package net.mov51.aspenprefix.helpers;
+package mov.naspen.naspenprefix.helpers;
 
+import mov.naspen.naspenprefix.NaspenPrefix;
 import mov.naspen.periderm.helpers.luckPerms.AspenMetaKey;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -12,8 +13,7 @@ import java.util.*;
 
 import static mov.naspen.periderm.helpers.StringsHelper.StringToArrayListString;
 import static mov.naspen.periderm.helpers.StringsHelper.arrayListStringToString;
-import static net.mov51.aspenprefix.AspenPrefix.*;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.*;
+import static mov.naspen.naspenprefix.helpers.ConfigHelper.*;
 
 
 public class PrefixHelper {
@@ -23,11 +23,11 @@ public class PrefixHelper {
     public static final AspenMetaKey lastKnownPrefixes = new AspenMetaKey("PrefixList");
 
     public static String getSelectedPrefix(Player p){
-        return metaHelper.getMetaValue(p,currentPrefix) != null ? metaHelper.getMetaValue(p,currentPrefix) : getLowestPriorityPrefixTarget(p);
+        return NaspenPrefix.metaHelper.getMetaValue(p,currentPrefix) != null ? NaspenPrefix.metaHelper.getMetaValue(p,currentPrefix) : getLowestPriorityPrefixTarget(p);
     }
 
     private static String getLowestPriorityPrefixTarget(Player p){
-        return metaHelper.getMetaValue(p,lastKnownPrefixes) != null ? StringToArrayListString(metaHelper.getMetaValue(p,lastKnownPrefixes)).get(0) : defaultPrefixTarget;
+        return NaspenPrefix.metaHelper.getMetaValue(p,lastKnownPrefixes) != null ? StringToArrayListString(NaspenPrefix.metaHelper.getMetaValue(p,lastKnownPrefixes)).get(0) : defaultPrefixTarget;
     }
 
     public static boolean hasNoPrefix(Player p){
@@ -35,23 +35,23 @@ public class PrefixHelper {
     }
 
     public static void setSelectedPrefix(Player p, String Value){
-        metaHelper.setMetaValue(p,currentPrefix,Value);
+        NaspenPrefix.metaHelper.setMetaValue(p,currentPrefix,Value);
     }
 
     public static void clearSelectedPrefix(Player p){
-        metaHelper.clearMetaValue(p,currentPrefix);
+        NaspenPrefix.metaHelper.clearMetaValue(p,currentPrefix);
     }
 
     public static void setCustomPrefix(Player p, String Value){
-        metaHelper.setMetaValue(p,customPrefix,Value);
+        NaspenPrefix.metaHelper.setMetaValue(p,customPrefix,Value);
     }
 
     public static String getCustomPrefix(Player p) {
-        return metaHelper.getMetaValue(p,customPrefix);
+        return NaspenPrefix.metaHelper.getMetaValue(p,customPrefix);
     }
 
     public static boolean hasCustomPrefix(Player p) {
-        return metaHelper.hasMetaValue(p,customPrefix);
+        return NaspenPrefix.metaHelper.hasMetaValue(p,customPrefix);
     }
 
     public static TextComponent getPrefixAsComponent(String prefix){
@@ -68,12 +68,12 @@ public class PrefixHelper {
 
     public static void loadPlayerPrefixList(Player p){
         //get LP-user.
-        User user = metaHelper.getLPapi().getPlayerAdapter(Player.class).getUser(p);
+        User user = NaspenPrefix.metaHelper.getLPapi().getPlayerAdapter(Player.class).getUser(p);
         //define prefix TreeMap for unsorted prefixes to be added with their weight.
         TreeMap<String, Integer> unsortedPrefixes = new TreeMap<>();
         //Loop through nodes selected by query options.
-        for(Node n : user.resolveInheritedNodes(metaHelper.getLPapi().getContextManager().getQueryOptions(p))){
-            if (n.getKey().matches("AspenPrefix\\.prefix\\..+")){
+        for(Node n : user.resolveInheritedNodes(NaspenPrefix.metaHelper.getLPapi().getContextManager().getQueryOptions(p))){
+            if (n.getKey().matches("NaspenPrefix\\.prefix\\..+")){
                 //get Prefix Name.
                 String prefixName = n.getKey().split("\\.")[2];
                 //check if prefix is defined in the config by name.
@@ -82,7 +82,7 @@ public class PrefixHelper {
                     unsortedPrefixes.put(prefixName,getPrefixWeight(prefixName));
                 }else{
                     // if it isn't, warn the console that the prefix name isn't define but there is a node for it!
-                    logger.warning(ChatColor.RED + "Prefix " + prefixName + " is not defined in the config but you have a permission node for it!");
+                    NaspenPrefix.logger.warning(ChatColor.RED + "Prefix " + prefixName + " is not defined in the config but you have a permission node for it!");
                 }
             }
         }
@@ -92,17 +92,17 @@ public class PrefixHelper {
             unsortedPrefixes.put(defaultPrefixTarget,0);
         }
         ArrayList<String> sortedPrefixes = valueSortReverseToArray(unsortedPrefixes);
-        if(metaHelper.hasMetaValue(p,lastKnownPrefixes)){
+        if(NaspenPrefix.metaHelper.hasMetaValue(p,lastKnownPrefixes)){
             ArrayList<String> currentPrefixList = StringToArrayListString(
-                    metaHelper.getMetaValue(p,lastKnownPrefixes));
+                    NaspenPrefix.metaHelper.getMetaValue(p,lastKnownPrefixes));
             if(!sortedPrefixes.equals(currentPrefixList)){
-                chatHelper.sendChat(p,"Your prefixes have changed!");
+                NaspenPrefix.chatHelper.sendChat(p,"Your prefixes have changed!");
             }
         }
         if(sortedPrefixes.size() > 1){
-            metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(sortedPrefixes));
+            NaspenPrefix.metaHelper.setMetaValue(p,lastKnownPrefixes,arrayListStringToString(sortedPrefixes));
         }else{
-            metaHelper.setMetaValue(p,lastKnownPrefixes,sortedPrefixes.get(0));
+            NaspenPrefix.metaHelper.setMetaValue(p,lastKnownPrefixes,sortedPrefixes.get(0));
         }
 
     }
@@ -127,7 +127,7 @@ public class PrefixHelper {
     }
 
     public static ArrayList<String> getPlayerPrefixes(Player p){
-        return StringToArrayListString(metaHelper.getMetaValue(p,lastKnownPrefixes));
+        return StringToArrayListString(NaspenPrefix.metaHelper.getMetaValue(p,lastKnownPrefixes));
     }
 
 }

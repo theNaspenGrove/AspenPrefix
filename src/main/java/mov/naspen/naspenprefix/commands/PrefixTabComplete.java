@@ -1,5 +1,7 @@
-package net.mov51.aspenprefix.commands;
+package mov.naspen.naspenprefix.commands;
 
+import mov.naspen.naspenprefix.NaspenPrefix;
+import mov.naspen.naspenprefix.helpers.PrefixHelper;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -9,11 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.mov51.aspenprefix.AspenPrefix.permHelper;
-import static net.mov51.aspenprefix.commands.prefixList.prefixListOwn;
-import static net.mov51.aspenprefix.commands.prefixSelect.prefixSelectOwn;
-import static net.mov51.aspenprefix.commands.prefixSetCustom.prefixSetCustomOwn;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.*;
+import static mov.naspen.naspenprefix.commands.prefixList.prefixListOwn;
 
 public class PrefixTabComplete implements TabCompleter {
     @Override
@@ -24,7 +22,7 @@ public class PrefixTabComplete implements TabCompleter {
                 if(args.length == 1){
                     return whatCanRun(p);
                 }else if(args.length == 2){
-                    if(args[0].equals(prefixSelectOwn.getCommand())){
+                    if(args[0].equals(prefixSelect.prefixSelectOwn.getCommand())){
                         return whatPrefixes(p);
                     }
                 }
@@ -36,20 +34,20 @@ public class PrefixTabComplete implements TabCompleter {
     public static List<String> whatCanRun(Player p){
         ArrayList<String> l = new ArrayList<>();
         //list
-        if (permHelper.hasPermission(p, prefixListOwn,true)) l.add(prefixListOwn.getCommand());
+        if (NaspenPrefix.permHelper.hasPermission(p, prefixListOwn,true)) l.add(prefixListOwn.getCommand());
         //select
-        if (permHelper.hasPermission(p, prefixSelectOwn,true)) l.add(prefixSelectOwn.getCommand());
+        if (NaspenPrefix.permHelper.hasPermission(p, prefixSelect.prefixSelectOwn,true)) l.add(prefixSelect.prefixSelectOwn.getCommand());
         //setCustom
-        if (permHelper.hasPermission(p, prefixSetCustomOwn,true)) l.add(prefixSetCustomOwn.getCommand());
+        if (NaspenPrefix.permHelper.hasPermission(p, prefixSetCustom.prefixSetCustomOwn,true)) l.add(prefixSetCustom.prefixSetCustomOwn.getCommand());
         return l;
     }
 
     public static List<String> whatPrefixes(Player p){
         ArrayList<String> l = new ArrayList<>();
-        if(permHelper.hasPermission(p, prefixSetCustomOwn,true) && hasCustomPrefix(p)){
+        if(NaspenPrefix.permHelper.hasPermission(p, prefixSetCustom.prefixSetCustomOwn,true) && PrefixHelper.hasCustomPrefix(p)){
             l.add("Custom");
         }
-        l.addAll(getPlayerPrefixes(p));
+        l.addAll(PrefixHelper.getPlayerPrefixes(p));
         return l;
     }
 

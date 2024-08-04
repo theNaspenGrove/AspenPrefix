@@ -1,32 +1,30 @@
-package net.mov51.aspenprefix;
+package mov.naspen.naspenprefix;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static net.mov51.aspenprefix.helpers.ConfigHelper.getPrefixValue;
-import static net.mov51.aspenprefix.helpers.ConfigHelper.prefixFormat;
-import static net.mov51.aspenprefix.helpers.PrefixHelper.getCurrentPrefix;
+import static mov.naspen.naspenprefix.helpers.ConfigHelper.getPrefixValue;
+import static mov.naspen.naspenprefix.helpers.ConfigHelper.prefixFormat;
+import static mov.naspen.naspenprefix.helpers.PrefixHelper.getCurrentPrefix;
 
-public class AspenPrefixPlaceholders extends PlaceholderExpansion {
+public class NaspenPrefixPlaceholders extends PlaceholderExpansion {
 
-    private final AspenPrefix plugin;
+    private final NaspenPrefix plugin;
 
-
-
-    public AspenPrefixPlaceholders(AspenPrefix plugin) {
+    public NaspenPrefixPlaceholders(NaspenPrefix plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public @NotNull String getAuthor() {
-        return "mov51";
+        return "naspen";
     }
 
     @Override
     public @NotNull String getIdentifier() {
-        return "AspenPrefix";
+        return "NaspenPrefix";
     }
 
     @Override
@@ -42,7 +40,7 @@ public class AspenPrefixPlaceholders extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer p, String params) {
 
-        if(params.equalsIgnoreCase("ActiveAspenPrefix")){
+        if(params.equalsIgnoreCase("ActivePrefix")){
             return prefixFormat.replaceFirst("\\$prefix",getPrefixValue(getCurrentPrefix((Player) p)));
         }
 
