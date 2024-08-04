@@ -1,16 +1,30 @@
-#prefix used by the plugin when sending chat messages.
-chat-prefix: "Naspen-Prefix"
+#This is the prefix that will be used for the plugin.
+chat-prefix: "&a&l[&bNaspen-Prefix&a&l]&r"
 
-#prefix used if the player has no prefix permissions.
-default-prefix: '&6[&r{#812409}Spectator&6]&r'
+#Fallback prefix if the player does not have a prefix or the prefix is not found.
+default-prefix: "{#FF0000}Broken-One"
 
 #Use $prefix to place the prefix in your format.
-prefix-format: '&6[&r$prefix&6]&r'
+prefix-format: "&6[&r$prefix&6]&r"
 
 #prefixes available for players.
-#you can use the AspenPrefix.prefix.<prefixName> permission node to grant prefixes.
+#you can use the NaspenPrefix.prefix.<prefixName> permission node to grant prefixes.
 Prefixes:
-  Staff: "{#FF8317}Staff"
-  Moderator: "{#00c2ff}Mod"
-  VIP: "{#9f29ff}VIP"
-  Guest: "{#11806a}Player"
+  staff:
+    prefix: "&#FF8317Staff"
+    weight: 100
+  patron:
+    prefix: "&#435FD6Patron"
+    weight: 70
+  twitch:
+    prefix: "&#D621FFTwitch-Sub"
+    weight: 50
+  twitchFollower:
+    prefix: "&#D621FFTwitch-Follower"
+    weight: 30
+  booster:
+    prefix: "&#F47FFFBooster"
+    weight: 10
+  spectator:
+    prefix: "&#11806aSpectator"
+    weight: 1
