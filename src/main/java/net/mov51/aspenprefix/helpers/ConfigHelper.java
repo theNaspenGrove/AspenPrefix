@@ -38,12 +38,12 @@ public class ConfigHelper {
     }
 
     public static int getPrefixWeight(String prefix){
-        return prefixes.get(prefix).weight;
+        return prefixes.get(prefix).getWeight();
     }
 
     public static String getPrefixValue(String requestedPrefixName){
         if(isPrefixDefined(requestedPrefixName)){
-            return prefixes.get(requestedPrefixName).prefix;
+            return prefixes.get(requestedPrefixName).getPrefix();
         }else if(requestedPrefixName.equals(defaultPrefixTarget)){
             return defaultPlayerPrefix;
         }
