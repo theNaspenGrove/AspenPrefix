@@ -36,7 +36,7 @@ public final class NaspenPrefix extends JavaPlugin {
         //create periderm chat helper
         chatHelper = new AspenChatHelper(pluginPrefix);
         //create periderm perms helper
-        permHelper = new PermissionHelper("NaspenPrefix.",
+        permHelper = new PermissionHelper("naspenprefix.command.",
                 new PredefinedMessage(Component.text("You don't have permission to run that command!")),chatHelper);
 
         //create default config file

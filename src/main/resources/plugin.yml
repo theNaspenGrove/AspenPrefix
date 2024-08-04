@@ -10,18 +10,18 @@ commands:
   prefix:
     description: Primary prefix command
     usage: /prefix
-    permission: NaspenPrefix.prefixCommand
+    permission: naspenprefix.command.prefix
 
 permissions:
-  AspenPrefix.prefixCommand:
+  naspenprefix.command.prefix:
     description: Ability to run the Prefix command. Required for all sub-commands
     default: false
-  AspenPrefix.prefixList:
+  naspenprefix.command.prefix.list:
     description: Ability to list the prefixes you have access to. Requires the 'NaspenPrefix.prefixCommand' permission
     default: true
-  AspenPrefix.prefixSelect:
+  naspenprefix.command.prefix.select:
     description: Ability to select the prefix you want to use out of a list of the prefixes you have access to. Requires the 'AspenPrefix.prefixCommand' permission
     default: true
-  AspenPrefix.prefixSetCustom:
+  naspenprefix.command.prefix.set.custom.own:
     description: Ability to set your own custom prefix. Requires the 'NaspenPrefix.prefixCommand' permission
     default: false

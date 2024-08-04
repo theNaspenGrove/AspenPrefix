@@ -18,7 +18,7 @@ public class PrefixCommand implements CommandExecutor {
 
     private final PredefinedMessage denyMessage = new PredefinedMessage(Component.text("You don't have permission to run that command!"));
     private final PermItem prefixCommand = new PermItem(
-            "prefixCommand",
+            "prefix",
             denyMessage,"/prefix");
 
     @Override

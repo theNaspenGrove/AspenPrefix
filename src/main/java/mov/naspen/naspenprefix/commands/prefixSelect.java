@@ -13,7 +13,7 @@ public class prefixSelect {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text(
             "You don't have permission to select a prefix!"));
-    public static final PermItem prefixSelectOwn = new PermItem("prefixSelect", denyMessageOwn, "select");
+    public static final PermItem prefixSelectOwn = new PermItem("prefix.select", denyMessageOwn, "select");
     public static final String customPrefixTarget = "custom-prefix";
 
     private static final PredefinedMessage useTheListCommand =new PredefinedMessage(Component.text()

@@ -18,9 +18,9 @@ import static mov.naspen.naspenprefix.helpers.ConfigHelper.*;
 
 public class PrefixHelper {
 
-    public static final AspenMetaKey currentPrefix = new AspenMetaKey("CurrentPrefix");
-    public static final AspenMetaKey customPrefix = new AspenMetaKey("CustomPrefix");
-    public static final AspenMetaKey lastKnownPrefixes = new AspenMetaKey("PrefixList");
+    public static final AspenMetaKey currentPrefix = new AspenMetaKey("current-prefix");
+    public static final AspenMetaKey customPrefix = new AspenMetaKey("custom-prefix");
+    public static final AspenMetaKey lastKnownPrefixes = new AspenMetaKey("prefix-list");
 
     public static String getSelectedPrefix(Player p){
         return NaspenPrefix.metaHelper.getMetaValue(p,currentPrefix) != null ? NaspenPrefix.metaHelper.getMetaValue(p,currentPrefix) : getLowestPriorityPrefixTarget(p);

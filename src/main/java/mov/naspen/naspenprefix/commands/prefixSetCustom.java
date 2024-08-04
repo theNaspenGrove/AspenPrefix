@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class prefixSetCustom {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text("You don't have permission to set a custom prefix!"));
-    public static final PermItem prefixSetCustomOwn = new PermItem("prefixSetCustom", denyMessageOwn,"setCustom");
+    public static final PermItem prefixSetCustomOwn = new PermItem("prefix.set.own.custom", denyMessageOwn,"setCustom");
 
     public static boolean command(Player p, String[] args){
         if(args.length <= 3){

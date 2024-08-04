@@ -13,7 +13,7 @@ public class prefixList {
 
     private static final PredefinedMessage denyMessageOwn =new PredefinedMessage(Component.text(
             "You don't have permission to list your prefixes!!"));
-    public static final PermItem prefixListOwn = new PermItem("prefixList", denyMessageOwn, "list");
+    public static final PermItem prefixListOwn = new PermItem("prefix.list", denyMessageOwn, "list");
 
     public static boolean command(Player p, String[] args){
         if(NaspenPrefix.permHelper.hasPermission(p,prefixListOwn)){

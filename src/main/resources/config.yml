@@ -9,17 +9,17 @@ prefix-format: "&6[&r$prefix&6]&r"
 
 #prefixes available for players.
 #you can use the NaspenPrefix.prefix.<prefixName> permission node to grant prefixes.
-Prefixes:
+prefixes:
   staff:
     prefix: "&#FF8317Staff"
     weight: 100
   patron:
     prefix: "&#435FD6Patron"
     weight: 70
-  twitch:
+  twitch-sub:
     prefix: "&#D621FFTwitch-Sub"
     weight: 50
-  twitchFollower:
+  twitch-follower:
     prefix: "&#D621FFTwitch-Follower"
     weight: 30
   booster:
